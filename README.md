@@ -1,4 +1,8 @@
-# 🦞 Clawdbot — Personal AI Assistant
+# 🦞 Clawdbot 中文版 — 私有化部署的 AI 智能助手
+
+> **🇨🇳 这是 [clawdbot/clawdbot](https://github.com/clawdbot/clawdbot) 的简体中文版本，定期与上游保持同步。**
+>
+> 欢迎提交 Issue 和 PR！Bug 修复和功能优化会考虑贡献回上游。
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/clawdbot/clawdbot/main/docs/whatsapp-clawd.jpg" alt="Clawdbot" width="400">
@@ -9,164 +13,160 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/clawdbot/clawdbot/actions/workflows/ci.yml?branch=main"><img src="https://img.shields.io/github/actions/workflow/status/clawdbot/clawdbot/ci.yml?branch=main&style=for-the-badge" alt="CI status"></a>
-  <a href="https://github.com/clawdbot/clawdbot/releases"><img src="https://img.shields.io/github/v/release/clawdbot/clawdbot?include_prereleases&style=for-the-badge" alt="GitHub release"></a>
+  <a href="https://github.com/jiulingyun/clawdbot-chinese/actions/workflows/ci.yml?branch=main"><img src="https://img.shields.io/github/actions/workflow/status/jiulingyun/clawdbot-chinese/ci.yml?branch=main&style=for-the-badge" alt="CI 状态"></a>
+  <a href="https://github.com/jiulingyun/clawdbot-chinese/releases"><img src="https://img.shields.io/github/v/release/jiulingyun/clawdbot-chinese?include_prereleases&style=for-the-badge" alt="GitHub 发布"></a>
   <a href="https://deepwiki.com/clawdbot/clawdbot"><img src="https://img.shields.io/badge/DeepWiki-clawdbot-111111?style=for-the-badge" alt="DeepWiki"></a>
   <a href="https://discord.gg/clawd"><img src="https://img.shields.io/discord/1456350064065904867?label=Discord&logo=discord&logoColor=white&color=5865F2&style=for-the-badge" alt="Discord"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT 许可证"></a>
 </p>
 
-**Clawdbot** is a *personal AI assistant* you run on your own devices.
-It answers you on the channels you already use (WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, iMessage, Microsoft Teams, WebChat), plus extension channels like BlueBubbles, Matrix, Zalo, and Zalo Personal. It can speak and listen on macOS/iOS/Android, and can render a live Canvas you control. The Gateway is just the control plane — the product is the assistant.
+**Clawdbot** 是一款可在你自己设备上运行的*私有 AI 智能助手*。
+它可以在你常用的渠道上回复你（WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage、Microsoft Teams、WebChat），还支持 BlueBubbles、Matrix、Zalo 等扩展渠道。它可以在 macOS/iOS/Android 上进行语音交互，还能渲染你可控制的实时 Canvas 画布。Gateway 只是控制平面——产品的核心是智能助手本身。
 
-If you want a personal, single-user assistant that feels local, fast, and always-on, this is it.
+如果你想要一个本地优先、快速响应、始终在线的私人单用户助手，这就是你要找的。
 
-[Website](https://clawdbot.com) · [Docs](https://docs.clawd.bot) · [Getting Started](https://docs.clawd.bot/start/getting-started) · [Updating](https://docs.clawd.bot/install/updating) · [Showcase](https://docs.clawd.bot/start/showcase) · [FAQ](https://docs.clawd.bot/start/faq) · [Wizard](https://docs.clawd.bot/start/wizard) · [Nix](https://github.com/clawdbot/nix-clawdbot) · [Docker](https://docs.clawd.bot/install/docker) · [Discord](https://discord.gg/clawd)
+[官网](https://clawdbot.com) · [文档](https://docs.clawd.bot) · [快速开始](https://docs.clawd.bot/start/getting-started) · [更新指南](https://docs.clawd.bot/install/updating) · [案例展示](https://docs.clawd.bot/start/showcase) · [常见问题](https://docs.clawd.bot/start/faq) · [安装向导](https://docs.clawd.bot/start/wizard) · [Nix](https://github.com/clawdbot/nix-clawdbot) · [Docker](https://docs.clawd.bot/install/docker) · [Discord](https://discord.gg/clawd)
 
-Preferred setup: run the onboarding wizard (`clawdbot onboard`). It walks through gateway, workspace, channels, and skills. The CLI wizard is the recommended path and works on **macOS, Linux, and Windows (via WSL2; strongly recommended)**.
-Works with npm, pnpm, or bun.
-New install? Start here: [Getting started](https://docs.clawd.bot/start/getting-started)
+推荐方式：运行安装向导（`clawdbot onboard`）。它会引导你完成 Gateway、工作区、渠道和技能的配置。CLI 向导是推荐的安装路径，支持 **macOS、Linux 和 Windows（通过 WSL2，强烈推荐）**。
+支持 npm、pnpm 或 bun。
+新用户？从这里开始：[快速开始](https://docs.clawd.bot/start/getting-started)
 
-**Subscriptions (OAuth):**
-- **[Anthropic](https://www.anthropic.com/)** (Claude Pro/Max)
-- **[OpenAI](https://openai.com/)** (ChatGPT/Codex)
+**订阅服务（OAuth）：**
+- **[Anthropic](https://www.anthropic.com/)**（Claude Pro/Max）
+- **[OpenAI](https://openai.com/)**（ChatGPT/Codex）
 
-Model note: while any model is supported, I strongly recommend **Anthropic Pro/Max (100/200) + Opus 4.5** for long‑context strength and better prompt‑injection resistance. See [Onboarding](https://docs.clawd.bot/start/onboarding).
+模型建议：虽然支持任何模型，但强烈推荐 **Anthropic Pro/Max (100/200) + Opus 4.5**，具有更强的长上下文能力和更好的提示注入防护。详见 [安装引导](https://docs.clawd.bot/start/onboarding)。
 
-## Models (selection + auth)
+## 模型配置与认证
 
-- Models config + CLI: [Models](https://docs.clawd.bot/concepts/models)
-- Auth profile rotation (OAuth vs API keys) + fallbacks: [Model failover](https://docs.clawd.bot/concepts/model-failover)
+- 模型配置 + CLI：[模型](https://docs.clawd.bot/concepts/models)
+- 认证配置轮换（OAuth vs API 密钥）+ 故障转移：[模型故障转移](https://docs.clawd.bot/concepts/model-failover)
 
-## Install (recommended)
+## 安装（推荐方式）
 
-Runtime: **Node ≥22**.
+运行时要求：**Node ≥22**
 
 ```bash
 npm install -g clawdbot@latest
-# or: pnpm add -g clawdbot@latest
+# 或者：pnpm add -g clawdbot@latest
 
 clawdbot onboard --install-daemon
 ```
 
-The wizard installs the Gateway daemon (launchd/systemd user service) so it stays running.
+向导会安装 Gateway 守护进程（launchd/systemd 用户服务），使其保持运行。
 
-## Quick start (TL;DR)
+## 快速开始
 
-Runtime: **Node ≥22**.
+运行时要求：**Node ≥22**
 
-Full beginner guide (auth, pairing, channels): [Getting started](https://docs.clawd.bot/start/getting-started)
+完整新手指南（认证、配对、渠道）：[快速开始](https://docs.clawd.bot/start/getting-started)
 
 ```bash
 clawdbot onboard --install-daemon
 
 clawdbot gateway --port 18789 --verbose
 
-# Send a message
-clawdbot message send --to +1234567890 --message "Hello from Clawdbot"
+# 发送消息
+clawdbot message send --to +1234567890 --message "你好，来自 Clawdbot"
 
-# Talk to the assistant (optionally deliver back to any connected channel: WhatsApp/Telegram/Slack/Discord/Google Chat/Signal/iMessage/BlueBubbles/Microsoft Teams/Matrix/Zalo/Zalo Personal/WebChat)
-clawdbot agent --message "Ship checklist" --thinking high
+# 与助手对话（可选择将回复发送到任何已连接的渠道：WhatsApp/Telegram/Slack/Discord/Google Chat/Signal/iMessage/BlueBubbles/Microsoft Teams/Matrix/Zalo/Zalo Personal/WebChat）
+clawdbot agent --message "发货清单" --thinking high
 ```
 
-Upgrading? [Updating guide](https://docs.clawd.bot/install/updating) (and run `clawdbot doctor`).
+升级？参考 [更新指南](https://docs.clawd.bot/install/updating)（并运行 `clawdbot doctor`）。
 
-## Development channels
+## 发布渠道
 
-- **stable**: tagged releases (`vYYYY.M.D` or `vYYYY.M.D-<patch>`), npm dist-tag `latest`.
-- **beta**: prerelease tags (`vYYYY.M.D-beta.N`), npm dist-tag `beta` (macOS app may be missing).
-- **dev**: moving head of `main`, npm dist-tag `dev` (when published).
+- **stable**：标签发布版（`vYYYY.M.D` 或 `vYYYY.M.D-<patch>`），npm dist-tag `latest`。
+- **beta**：预发布标签（`vYYYY.M.D-beta.N`），npm dist-tag `beta`（macOS 应用可能缺失）。
+- **dev**：`main` 分支最新代码，npm dist-tag `dev`（如有发布）。
 
-Switch channels (git + npm): `clawdbot update --channel stable|beta|dev`.
-Details: [Development channels](https://docs.clawd.bot/install/development-channels).
+切换渠道（git + npm）：`clawdbot update --channel stable|beta|dev`
+详情：[发布渠道](https://docs.clawd.bot/install/development-channels)
 
-## From source (development)
+## 从源码构建（开发）
 
-Prefer `pnpm` for builds from source. Bun is optional for running TypeScript directly.
+源码构建推荐使用 `pnpm`。Bun 可选，用于直接运行 TypeScript。
 
 ```bash
-git clone https://github.com/clawdbot/clawdbot.git
-cd clawdbot
+git clone https://github.com/jiulingyun/clawdbot-chinese.git
+cd clawdbot-chinese
 
 pnpm install
-pnpm ui:build # auto-installs UI deps on first run
+pnpm ui:build # 首次运行会自动安装 UI 依赖
 pnpm build
 
 pnpm clawdbot onboard --install-daemon
 
-# Dev loop (auto-reload on TS changes)
+# 开发循环（TS 文件变更时自动重载）
 pnpm gateway:watch
 ```
 
-Note: `pnpm clawdbot ...` runs TypeScript directly (via `tsx`). `pnpm build` produces `dist/` for running via Node / the packaged `clawdbot` binary.
+注意：`pnpm clawdbot ...` 通过 `tsx` 直接运行 TypeScript。`pnpm build` 生成 `dist/` 目录，用于通过 Node 或打包后的 `clawdbot` 二进制文件运行。
 
-## Security defaults (DM access)
+## 安全默认设置（私信访问）
 
-Clawdbot connects to real messaging surfaces. Treat inbound DMs as **untrusted input**.
+Clawdbot 连接到真实的消息平台。请将收到的私信视为**不可信输入**。
 
-Full security guide: [Security](https://docs.clawd.bot/gateway/security)
+完整安全指南：[安全](https://docs.clawd.bot/gateway/security)
 
-Default behavior on Telegram/WhatsApp/Signal/iMessage/Microsoft Teams/Discord/Google Chat/Slack:
-- **DM pairing** (`dmPolicy="pairing"` / `channels.discord.dm.policy="pairing"` / `channels.slack.dm.policy="pairing"`): unknown senders receive a short pairing code and the bot does not process their message.
-- Approve with: `clawdbot pairing approve <channel> <code>` (then the sender is added to a local allowlist store).
-- Public inbound DMs require an explicit opt-in: set `dmPolicy="open"` and include `"*"` in the channel allowlist (`allowFrom` / `channels.discord.dm.allowFrom` / `channels.slack.dm.allowFrom`).
+Telegram/WhatsApp/Signal/iMessage/Microsoft Teams/Discord/Google Chat/Slack 的默认行为：
+- **私信配对**（`dmPolicy="pairing"` / `channels.discord.dm.policy="pairing"` / `channels.slack.dm.policy="pairing"`）：未知发送者会收到一个短配对码，机器人不会处理他们的消息。
+- 批准方式：`clawdbot pairing approve <channel> <code>`（发送者会被添加到本地白名单存储中）。
+- 公开接收私信需要明确选择加入：设置 `dmPolicy="open"` 并在渠道白名单中包含 `"*"`（`allowFrom` / `channels.discord.dm.allowFrom` / `channels.slack.dm.allowFrom`）。
 
-Run `clawdbot doctor` to surface risky/misconfigured DM policies.
+运行 `clawdbot doctor` 可发现有风险或配置错误的私信策略。
 
-## Highlights
+## 亮点功能
 
-- **[Local-first Gateway](https://docs.clawd.bot/gateway)** — single control plane for sessions, channels, tools, and events.
-- **[Multi-channel inbox](https://docs.clawd.bot/channels)** — WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, iMessage, BlueBubbles, Microsoft Teams, Matrix, Zalo, Zalo Personal, WebChat, macOS, iOS/Android.
-- **[Multi-agent routing](https://docs.clawd.bot/gateway/configuration)** — route inbound channels/accounts/peers to isolated agents (workspaces + per-agent sessions).
-- **[Voice Wake](https://docs.clawd.bot/nodes/voicewake) + [Talk Mode](https://docs.clawd.bot/nodes/talk)** — always-on speech for macOS/iOS/Android with ElevenLabs.
-- **[Live Canvas](https://docs.clawd.bot/platforms/mac/canvas)** — agent-driven visual workspace with [A2UI](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui).
-- **[First-class tools](https://docs.clawd.bot/tools)** — browser, canvas, nodes, cron, sessions, and Discord/Slack actions.
-- **[Companion apps](https://docs.clawd.bot/platforms/macos)** — macOS menu bar app + iOS/Android [nodes](https://docs.clawd.bot/nodes).
-- **[Onboarding](https://docs.clawd.bot/start/wizard) + [skills](https://docs.clawd.bot/tools/skills)** — wizard-driven setup with bundled/managed/workspace skills.
+- **[本地优先 Gateway](https://docs.clawd.bot/gateway)** — 会话、渠道、工具和事件的统一控制平面。
+- **[多渠道收件箱](https://docs.clawd.bot/channels)** — WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage、BlueBubbles、Microsoft Teams、Matrix、Zalo、Zalo Personal、WebChat、macOS、iOS/Android。
+- **[多智能体路由](https://docs.clawd.bot/gateway/configuration)** — 将入站渠道/账户/对等节点路由到隔离的智能体（工作区 + 每智能体会话）。
+- **[语音唤醒](https://docs.clawd.bot/nodes/voicewake) + [对话模式](https://docs.clawd.bot/nodes/talk)** — macOS/iOS/Android 上的始终在线语音，支持 ElevenLabs。
+- **[实时 Canvas](https://docs.clawd.bot/platforms/mac/canvas)** — 智能体驱动的可视化工作区，支持 [A2UI](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui)。
+- **[一流的工具支持](https://docs.clawd.bot/tools)** — 浏览器、Canvas、节点、定时任务、会话以及 Discord/Slack 操作。
+- **[配套应用](https://docs.clawd.bot/platforms/macos)** — macOS 菜单栏应用 + iOS/Android [节点](https://docs.clawd.bot/nodes)。
+- **[安装引导](https://docs.clawd.bot/start/wizard) + [技能](https://docs.clawd.bot/tools/skills)** — 向导式设置，支持内置/托管/工作区技能。
 
-## Star History
+## 已构建的功能
 
-[![Star History Chart](https://api.star-history.com/svg?repos=clawdbot/clawdbot&type=date&legend=top-left)](https://www.star-history.com/#clawdbot/clawdbot&type=date&legend=top-left)
+### 核心平台
+- [Gateway WS 控制平面](https://docs.clawd.bot/gateway)：会话、在线状态、配置、定时任务、Webhook、[控制 UI](https://docs.clawd.bot/web) 和 [Canvas 主机](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui)。
+- [CLI 命令行](https://docs.clawd.bot/tools/agent-send)：gateway、agent、send、[向导](https://docs.clawd.bot/start/wizard) 和 [doctor](https://docs.clawd.bot/gateway/doctor)。
+- [Pi 智能体运行时](https://docs.clawd.bot/concepts/agent)：RPC 模式，支持工具流和块流。
+- [会话模型](https://docs.clawd.bot/concepts/session)：`main` 用于直接聊天，群组隔离、激活模式、队列模式、回复返回。群组规则：[群组](https://docs.clawd.bot/concepts/groups)。
+- [媒体管道](https://docs.clawd.bot/nodes/images)：图片/音频/视频、转录钩子、大小限制、临时文件生命周期。音频详情：[音频](https://docs.clawd.bot/nodes/audio)。
 
-## Everything we built so far
+### 渠道
+- [渠道](https://docs.clawd.bot/channels)：[WhatsApp](https://docs.clawd.bot/channels/whatsapp) (Baileys)、[Telegram](https://docs.clawd.bot/channels/telegram) (grammY)、[Slack](https://docs.clawd.bot/channels/slack) (Bolt)、[Discord](https://docs.clawd.bot/channels/discord) (discord.js)、[Google Chat](https://docs.clawd.bot/channels/googlechat) (Chat API)、[Signal](https://docs.clawd.bot/channels/signal) (signal-cli)、[iMessage](https://docs.clawd.bot/channels/imessage) (imsg)、[BlueBubbles](https://docs.clawd.bot/channels/bluebubbles) (扩展)、[Microsoft Teams](https://docs.clawd.bot/channels/msteams) (扩展)、[Matrix](https://docs.clawd.bot/channels/matrix) (扩展)、[Zalo](https://docs.clawd.bot/channels/zalo) (扩展)、[Zalo Personal](https://docs.clawd.bot/channels/zalouser) (扩展)、[WebChat](https://docs.clawd.bot/web/webchat)。
+- [群组路由](https://docs.clawd.bot/concepts/group-messages)：@提及门控、回复标签、按渠道分块和路由。渠道规则：[渠道](https://docs.clawd.bot/channels)。
 
-### Core platform
-- [Gateway WS control plane](https://docs.clawd.bot/gateway) with sessions, presence, config, cron, webhooks, [Control UI](https://docs.clawd.bot/web), and [Canvas host](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui).
-- [CLI surface](https://docs.clawd.bot/tools/agent-send): gateway, agent, send, [wizard](https://docs.clawd.bot/start/wizard), and [doctor](https://docs.clawd.bot/gateway/doctor).
-- [Pi agent runtime](https://docs.clawd.bot/concepts/agent) in RPC mode with tool streaming and block streaming.
-- [Session model](https://docs.clawd.bot/concepts/session): `main` for direct chats, group isolation, activation modes, queue modes, reply-back. Group rules: [Groups](https://docs.clawd.bot/concepts/groups).
-- [Media pipeline](https://docs.clawd.bot/nodes/images): images/audio/video, transcription hooks, size caps, temp file lifecycle. Audio details: [Audio](https://docs.clawd.bot/nodes/audio).
+### 应用 + 节点
+- [macOS 应用](https://docs.clawd.bot/platforms/macos)：菜单栏控制平面、[语音唤醒](https://docs.clawd.bot/nodes/voicewake)/PTT、[对话模式](https://docs.clawd.bot/nodes/talk)悬浮窗、[WebChat](https://docs.clawd.bot/web/webchat)、调试工具、[远程 Gateway](https://docs.clawd.bot/gateway/remote) 控制。
+- [iOS 节点](https://docs.clawd.bot/platforms/ios)：[Canvas](https://docs.clawd.bot/platforms/mac/canvas)、[语音唤醒](https://docs.clawd.bot/nodes/voicewake)、[对话模式](https://docs.clawd.bot/nodes/talk)、相机、屏幕录制、Bonjour 配对。
+- [Android 节点](https://docs.clawd.bot/platforms/android)：[Canvas](https://docs.clawd.bot/platforms/mac/canvas)、[对话模式](https://docs.clawd.bot/nodes/talk)、相机、屏幕录制、可选短信。
+- [macOS 节点模式](https://docs.clawd.bot/nodes)：system.run/notify + Canvas/相机暴露。
 
-### Channels
-- [Channels](https://docs.clawd.bot/channels): [WhatsApp](https://docs.clawd.bot/channels/whatsapp) (Baileys), [Telegram](https://docs.clawd.bot/channels/telegram) (grammY), [Slack](https://docs.clawd.bot/channels/slack) (Bolt), [Discord](https://docs.clawd.bot/channels/discord) (discord.js), [Google Chat](https://docs.clawd.bot/channels/googlechat) (Chat API), [Signal](https://docs.clawd.bot/channels/signal) (signal-cli), [iMessage](https://docs.clawd.bot/channels/imessage) (imsg), [BlueBubbles](https://docs.clawd.bot/channels/bluebubbles) (extension), [Microsoft Teams](https://docs.clawd.bot/channels/msteams) (extension), [Matrix](https://docs.clawd.bot/channels/matrix) (extension), [Zalo](https://docs.clawd.bot/channels/zalo) (extension), [Zalo Personal](https://docs.clawd.bot/channels/zalouser) (extension), [WebChat](https://docs.clawd.bot/web/webchat).
-- [Group routing](https://docs.clawd.bot/concepts/group-messages): mention gating, reply tags, per-channel chunking and routing. Channel rules: [Channels](https://docs.clawd.bot/channels).
+### 工具 + 自动化
+- [浏览器控制](https://docs.clawd.bot/tools/browser)：专用 clawd Chrome/Chromium、快照、操作、上传、配置文件。
+- [Canvas](https://docs.clawd.bot/platforms/mac/canvas)：[A2UI](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui) push/reset、eval、snapshot。
+- [节点](https://docs.clawd.bot/nodes)：相机拍照/录制、屏幕录制、[location.get](https://docs.clawd.bot/nodes/location-command)、通知。
+- [定时任务 + 唤醒](https://docs.clawd.bot/automation/cron-jobs)；[Webhook](https://docs.clawd.bot/automation/webhook)；[Gmail Pub/Sub](https://docs.clawd.bot/automation/gmail-pubsub)。
+- [技能平台](https://docs.clawd.bot/tools/skills)：内置、托管和工作区技能，支持安装门控 + UI。
 
-### Apps + nodes
-- [macOS app](https://docs.clawd.bot/platforms/macos): menu bar control plane, [Voice Wake](https://docs.clawd.bot/nodes/voicewake)/PTT, [Talk Mode](https://docs.clawd.bot/nodes/talk) overlay, [WebChat](https://docs.clawd.bot/web/webchat), debug tools, [remote gateway](https://docs.clawd.bot/gateway/remote) control.
-- [iOS node](https://docs.clawd.bot/platforms/ios): [Canvas](https://docs.clawd.bot/platforms/mac/canvas), [Voice Wake](https://docs.clawd.bot/nodes/voicewake), [Talk Mode](https://docs.clawd.bot/nodes/talk), camera, screen recording, Bonjour pairing.
-- [Android node](https://docs.clawd.bot/platforms/android): [Canvas](https://docs.clawd.bot/platforms/mac/canvas), [Talk Mode](https://docs.clawd.bot/nodes/talk), camera, screen recording, optional SMS.
-- [macOS node mode](https://docs.clawd.bot/nodes): system.run/notify + canvas/camera exposure.
+### 运行时 + 安全
+- [渠道路由](https://docs.clawd.bot/concepts/channel-routing)、[重试策略](https://docs.clawd.bot/concepts/retry) 和 [流式/分块](https://docs.clawd.bot/concepts/streaming)。
+- [在线状态](https://docs.clawd.bot/concepts/presence)、[输入指示器](https://docs.clawd.bot/concepts/typing-indicators) 和 [用量追踪](https://docs.clawd.bot/concepts/usage-tracking)。
+- [模型](https://docs.clawd.bot/concepts/models)、[模型故障转移](https://docs.clawd.bot/concepts/model-failover) 和 [会话裁剪](https://docs.clawd.bot/concepts/session-pruning)。
+- [安全](https://docs.clawd.bot/gateway/security) 和 [故障排除](https://docs.clawd.bot/channels/troubleshooting)。
 
-### Tools + automation
-- [Browser control](https://docs.clawd.bot/tools/browser): dedicated clawd Chrome/Chromium, snapshots, actions, uploads, profiles.
-- [Canvas](https://docs.clawd.bot/platforms/mac/canvas): [A2UI](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui) push/reset, eval, snapshot.
-- [Nodes](https://docs.clawd.bot/nodes): camera snap/clip, screen record, [location.get](https://docs.clawd.bot/nodes/location-command), notifications.
-- [Cron + wakeups](https://docs.clawd.bot/automation/cron-jobs); [webhooks](https://docs.clawd.bot/automation/webhook); [Gmail Pub/Sub](https://docs.clawd.bot/automation/gmail-pubsub).
-- [Skills platform](https://docs.clawd.bot/tools/skills): bundled, managed, and workspace skills with install gating + UI.
+### 运维 + 打包
+- [控制 UI](https://docs.clawd.bot/web) + [WebChat](https://docs.clawd.bot/web/webchat) 直接由 Gateway 提供服务。
+- [Tailscale Serve/Funnel](https://docs.clawd.bot/gateway/tailscale) 或 [SSH 隧道](https://docs.clawd.bot/gateway/remote)，支持 token/密码认证。
+- [Nix 模式](https://docs.clawd.bot/install/nix) 用于声明式配置；[Docker](https://docs.clawd.bot/install/docker) 安装。
+- [Doctor](https://docs.clawd.bot/gateway/doctor) 迁移、[日志](https://docs.clawd.bot/logging)。
 
-### Runtime + safety
-- [Channel routing](https://docs.clawd.bot/concepts/channel-routing), [retry policy](https://docs.clawd.bot/concepts/retry), and [streaming/chunking](https://docs.clawd.bot/concepts/streaming).
-- [Presence](https://docs.clawd.bot/concepts/presence), [typing indicators](https://docs.clawd.bot/concepts/typing-indicators), and [usage tracking](https://docs.clawd.bot/concepts/usage-tracking).
-- [Models](https://docs.clawd.bot/concepts/models), [model failover](https://docs.clawd.bot/concepts/model-failover), and [session pruning](https://docs.clawd.bot/concepts/session-pruning).
-- [Security](https://docs.clawd.bot/gateway/security) and [troubleshooting](https://docs.clawd.bot/channels/troubleshooting).
-
-### Ops + packaging
-- [Control UI](https://docs.clawd.bot/web) + [WebChat](https://docs.clawd.bot/web/webchat) served directly from the Gateway.
-- [Tailscale Serve/Funnel](https://docs.clawd.bot/gateway/tailscale) or [SSH tunnels](https://docs.clawd.bot/gateway/remote) with token/password auth.
-- [Nix mode](https://docs.clawd.bot/install/nix) for declarative config; [Docker](https://docs.clawd.bot/install/docker)-based installs.
-- [Doctor](https://docs.clawd.bot/gateway/doctor) migrations, [logging](https://docs.clawd.bot/logging).
-
-## How it works (short)
+## 工作原理（简图）
 
 ```
 WhatsApp / Telegram / Slack / Discord / Google Chat / Signal / iMessage / BlueBubbles / Microsoft Teams / Matrix / Zalo / Zalo Personal / WebChat
@@ -174,133 +174,134 @@ WhatsApp / Telegram / Slack / Discord / Google Chat / Signal / iMessage / BlueBu
                ▼
 ┌───────────────────────────────┐
 │            Gateway            │
-│       (control plane)         │
+│         （控制平面）            │
 │     ws://127.0.0.1:18789      │
 └──────────────┬────────────────┘
                │
-               ├─ Pi agent (RPC)
+               ├─ Pi 智能体 (RPC)
                ├─ CLI (clawdbot …)
                ├─ WebChat UI
-               ├─ macOS app
-               └─ iOS / Android nodes
+               ├─ macOS 应用
+               └─ iOS / Android 节点
 ```
 
-## Key subsystems
+## 核心子系统
 
-- **[Gateway WebSocket network](https://docs.clawd.bot/concepts/architecture)** — single WS control plane for clients, tools, and events (plus ops: [Gateway runbook](https://docs.clawd.bot/gateway)).
-- **[Tailscale exposure](https://docs.clawd.bot/gateway/tailscale)** — Serve/Funnel for the Gateway dashboard + WS (remote access: [Remote](https://docs.clawd.bot/gateway/remote)).
-- **[Browser control](https://docs.clawd.bot/tools/browser)** — clawd‑managed Chrome/Chromium with CDP control.
-- **[Canvas + A2UI](https://docs.clawd.bot/platforms/mac/canvas)** — agent‑driven visual workspace (A2UI host: [Canvas/A2UI](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui)).
-- **[Voice Wake](https://docs.clawd.bot/nodes/voicewake) + [Talk Mode](https://docs.clawd.bot/nodes/talk)** — always‑on speech and continuous conversation.
-- **[Nodes](https://docs.clawd.bot/nodes)** — Canvas, camera snap/clip, screen record, `location.get`, notifications, plus macOS‑only `system.run`/`system.notify`.
+- **[Gateway WebSocket 网络](https://docs.clawd.bot/concepts/architecture)** — 客户端、工具和事件的单一 WS 控制平面（运维：[Gateway 手册](https://docs.clawd.bot/gateway)）。
+- **[Tailscale 暴露](https://docs.clawd.bot/gateway/tailscale)** — Gateway 仪表盘 + WS 的 Serve/Funnel（远程访问：[远程](https://docs.clawd.bot/gateway/remote)）。
+- **[浏览器控制](https://docs.clawd.bot/tools/browser)** — clawd 托管的 Chrome/Chromium，CDP 控制。
+- **[Canvas + A2UI](https://docs.clawd.bot/platforms/mac/canvas)** — 智能体驱动的可视化工作区（A2UI 主机：[Canvas/A2UI](https://docs.clawd.bot/platforms/mac/canvas#canvas-a2ui)）。
+- **[语音唤醒](https://docs.clawd.bot/nodes/voicewake) + [对话模式](https://docs.clawd.bot/nodes/talk)** — 始终在线语音和持续对话。
+- **[节点](https://docs.clawd.bot/nodes)** — Canvas、相机拍照/录制、屏幕录制、`location.get`、通知，以及 macOS 专属的 `system.run`/`system.notify`。
 
-## Tailscale access (Gateway dashboard)
+## Tailscale 访问（Gateway 仪表盘）
 
-Clawdbot can auto-configure Tailscale **Serve** (tailnet-only) or **Funnel** (public) while the Gateway stays bound to loopback. Configure `gateway.tailscale.mode`:
+Clawdbot 可以自动配置 Tailscale **Serve**（仅 tailnet）或 **Funnel**（公开），同时 Gateway 保持绑定到 loopback。配置 `gateway.tailscale.mode`：
 
-- `off`: no Tailscale automation (default).
-- `serve`: tailnet-only HTTPS via `tailscale serve` (uses Tailscale identity headers by default).
-- `funnel`: public HTTPS via `tailscale funnel` (requires shared password auth).
+- `off`：不启用 Tailscale 自动化（默认）。
+- `serve`：通过 `tailscale serve` 提供仅 tailnet 的 HTTPS（默认使用 Tailscale 身份头）。
+- `funnel`：通过 `tailscale funnel` 提供公开 HTTPS（需要共享密码认证）。
 
-Notes:
-- `gateway.bind` must stay `loopback` when Serve/Funnel is enabled (Clawdbot enforces this).
-- Serve can be forced to require a password by setting `gateway.auth.mode: "password"` or `gateway.auth.allowTailscale: false`.
-- Funnel refuses to start unless `gateway.auth.mode: "password"` is set.
-- Optional: `gateway.tailscale.resetOnExit` to undo Serve/Funnel on shutdown.
+注意事项：
+- 启用 Serve/Funnel 时，`gateway.bind` 必须保持为 `loopback`（Clawdbot 强制执行此规则）。
+- 可以通过设置 `gateway.auth.mode: "password"` 或 `gateway.auth.allowTailscale: false` 强制 Serve 要求密码。
+- 除非设置 `gateway.auth.mode: "password"`，否则 Funnel 拒绝启动。
+- 可选：`gateway.tailscale.resetOnExit` 用于在关闭时撤销 Serve/Funnel。
 
-Details: [Tailscale guide](https://docs.clawd.bot/gateway/tailscale) · [Web surfaces](https://docs.clawd.bot/web)
+详情：[Tailscale 指南](https://docs.clawd.bot/gateway/tailscale) · [Web 界面](https://docs.clawd.bot/web)
 
-## Remote Gateway (Linux is great)
+## 远程 Gateway（Linux 是个好选择）
 
-It’s perfectly fine to run the Gateway on a small Linux instance. Clients (macOS app, CLI, WebChat) can connect over **Tailscale Serve/Funnel** or **SSH tunnels**, and you can still pair device nodes (macOS/iOS/Android) to execute device‑local actions when needed.
+在小型 Linux 实例上运行 Gateway 完全没问题。客户端（macOS 应用、CLI、WebChat）可以通过 **Tailscale Serve/Funnel** 或 **SSH 隧道** 连接，你仍然可以配对设备节点（macOS/iOS/Android）来在需要时执行设备本地操作。
 
-- **Gateway host** runs the exec tool and channel connections by default.
-- **Device nodes** run device‑local actions (`system.run`, camera, screen recording, notifications) via `node.invoke`.
-In short: exec runs where the Gateway lives; device actions run where the device lives.
+- **Gateway 主机** 默认运行 exec 工具和渠道连接。
+- **设备节点** 通过 `node.invoke` 运行设备本地操作（`system.run`、相机、屏幕录制、通知）。
 
-Details: [Remote access](https://docs.clawd.bot/gateway/remote) · [Nodes](https://docs.clawd.bot/nodes) · [Security](https://docs.clawd.bot/gateway/security)
+简而言之：exec 在 Gateway 所在位置运行；设备操作在设备所在位置运行。
 
-## macOS permissions via the Gateway protocol
+详情：[远程访问](https://docs.clawd.bot/gateway/remote) · [节点](https://docs.clawd.bot/nodes) · [安全](https://docs.clawd.bot/gateway/security)
 
-The macOS app can run in **node mode** and advertises its capabilities + permission map over the Gateway WebSocket (`node.list` / `node.describe`). Clients can then execute local actions via `node.invoke`:
+## macOS 权限（通过 Gateway 协议）
 
-- `system.run` runs a local command and returns stdout/stderr/exit code; set `needsScreenRecording: true` to require screen-recording permission (otherwise you’ll get `PERMISSION_MISSING`).
-- `system.notify` posts a user notification and fails if notifications are denied.
-- `canvas.*`, `camera.*`, `screen.record`, and `location.get` are also routed via `node.invoke` and follow TCC permission status.
+macOS 应用可以在**节点模式**下运行，并通过 Gateway WebSocket 广播其能力和权限映射（`node.list` / `node.describe`）。客户端可以通过 `node.invoke` 执行本地操作：
 
-Elevated bash (host permissions) is separate from macOS TCC:
+- `system.run` 运行本地命令并返回 stdout/stderr/退出码；设置 `needsScreenRecording: true` 以要求屏幕录制权限（否则会得到 `PERMISSION_MISSING`）。
+- `system.notify` 发布用户通知，如果通知被拒绝则失败。
+- `canvas.*`、`camera.*`、`screen.record` 和 `location.get` 也通过 `node.invoke` 路由，遵循 TCC 权限状态。
 
-- Use `/elevated on|off` to toggle per‑session elevated access when enabled + allowlisted.
-- Gateway persists the per‑session toggle via `sessions.patch` (WS method) alongside `thinkingLevel`, `verboseLevel`, `model`, `sendPolicy`, and `groupActivation`.
+提升的 bash（主机权限）与 macOS TCC 分开：
 
-Details: [Nodes](https://docs.clawd.bot/nodes) · [macOS app](https://docs.clawd.bot/platforms/macos) · [Gateway protocol](https://docs.clawd.bot/concepts/architecture)
+- 使用 `/elevated on|off` 在启用并加入白名单时切换每会话的提升访问。
+- Gateway 通过 `sessions.patch`（WS 方法）持久化每会话的切换，与 `thinkingLevel`、`verboseLevel`、`model`、`sendPolicy` 和 `groupActivation` 一起。
 
-## Agent to Agent (sessions_* tools)
+详情：[节点](https://docs.clawd.bot/nodes) · [macOS 应用](https://docs.clawd.bot/platforms/macos) · [Gateway 协议](https://docs.clawd.bot/concepts/architecture)
 
-- Use these to coordinate work across sessions without jumping between chat surfaces.
-- `sessions_list` — discover active sessions (agents) and their metadata.
-- `sessions_history` — fetch transcript logs for a session.
-- `sessions_send` — message another session; optional reply‑back ping‑pong + announce step (`REPLY_SKIP`, `ANNOUNCE_SKIP`).
+## 智能体间通信（sessions_* 工具）
 
-Details: [Session tools](https://docs.clawd.bot/concepts/session-tool)
+- 使用这些工具在会话间协调工作，无需在聊天界面间切换。
+- `sessions_list` — 发现活跃会话（智能体）及其元数据。
+- `sessions_history` — 获取会话的对话日志。
+- `sessions_send` — 向另一个会话发送消息；可选回复返回乒乓 + 公告步骤（`REPLY_SKIP`、`ANNOUNCE_SKIP`）。
 
-## Skills registry (ClawdHub)
+详情：[会话工具](https://docs.clawd.bot/concepts/session-tool)
 
-ClawdHub is a minimal skill registry. With ClawdHub enabled, the agent can search for skills automatically and pull in new ones as needed.
+## 技能注册表（ClawdHub）
+
+ClawdHub 是一个简洁的技能注册表。启用 ClawdHub 后，智能体可以自动搜索技能并根据需要引入新技能。
 
 [ClawdHub](https://ClawdHub.com)
 
-## Chat commands
+## 聊天命令
 
-Send these in WhatsApp/Telegram/Slack/Google Chat/Microsoft Teams/WebChat (group commands are owner-only):
+在 WhatsApp/Telegram/Slack/Google Chat/Microsoft Teams/WebChat 中发送这些命令（群组命令仅限所有者）：
 
-- `/status` — compact session status (model + tokens, cost when available)
-- `/new` or `/reset` — reset the session
-- `/compact` — compact session context (summary)
-- `/think <level>` — off|minimal|low|medium|high|xhigh (GPT-5.2 + Codex models only)
+- `/status` — 简洁的会话状态（模型 + token 数，可用时显示费用）
+- `/new` 或 `/reset` — 重置会话
+- `/compact` — 压缩会话上下文（摘要）
+- `/think <level>` — off|minimal|low|medium|high|xhigh（仅 GPT-5.2 + Codex 模型）
 - `/verbose on|off`
-- `/usage off|tokens|full` — per-response usage footer
-- `/restart` — restart the gateway (owner-only in groups)
-- `/activation mention|always` — group activation toggle (groups only)
+- `/usage off|tokens|full` — 每次响应的用量页脚
+- `/restart` — 重启 Gateway（群组中仅限所有者）
+- `/activation mention|always` — 群组激活切换（仅群组）
 
-## Apps (optional)
+## 应用（可选）
 
-The Gateway alone delivers a great experience. All apps are optional and add extra features.
+单独的 Gateway 就能提供很好的体验。所有应用都是可选的，用于添加额外功能。
 
-If you plan to build/run companion apps, follow the platform runbooks below.
+如果你计划构建/运行配套应用，请参考以下平台手册。
 
-### macOS (Clawdbot.app) (optional)
+### macOS (Clawdbot.app)（可选）
 
-- Menu bar control for the Gateway and health.
-- Voice Wake + push-to-talk overlay.
-- WebChat + debug tools.
-- Remote gateway control over SSH.
+- Gateway 和健康状态的菜单栏控制。
+- 语音唤醒 + 按键说话悬浮窗。
+- WebChat + 调试工具。
+- 通过 SSH 进行远程 Gateway 控制。
 
-Note: signed builds required for macOS permissions to stick across rebuilds (see `docs/mac/permissions.md`).
+注意：需要签名构建才能使 macOS 权限在重建后保持（见 `docs/mac/permissions.md`）。
 
-### iOS node (optional)
+### iOS 节点（可选）
 
-- Pairs as a node via the Bridge.
-- Voice trigger forwarding + Canvas surface.
-- Controlled via `clawdbot nodes …`.
+- 通过 Bridge 作为节点配对。
+- 语音触发转发 + Canvas 界面。
+- 通过 `clawdbot nodes …` 控制。
 
-Runbook: [iOS connect](https://docs.clawd.bot/platforms/ios).
+运行手册：[iOS 连接](https://docs.clawd.bot/platforms/ios)
 
-### Android node (optional)
+### Android 节点（可选）
 
-- Pairs via the same Bridge + pairing flow as iOS.
-- Exposes Canvas, Camera, and Screen capture commands.
-- Runbook: [Android connect](https://docs.clawd.bot/platforms/android).
+- 与 iOS 使用相同的 Bridge + 配对流程进行配对。
+- 暴露 Canvas、相机和屏幕捕获命令。
+- 运行手册：[Android 连接](https://docs.clawd.bot/platforms/android)
 
-## Agent workspace + skills
+## 智能体工作区 + 技能
 
-- Workspace root: `~/clawd` (configurable via `agents.defaults.workspace`).
-- Injected prompt files: `AGENTS.md`, `SOUL.md`, `TOOLS.md`.
-- Skills: `~/clawd/skills/<skill>/SKILL.md`.
+- 工作区根目录：`~/clawd`（可通过 `agents.defaults.workspace` 配置）。
+- 注入的提示文件：`AGENTS.md`、`SOUL.md`、`TOOLS.md`。
+- 技能：`~/clawd/skills/<skill>/SKILL.md`。
 
-## Configuration
+## 配置
 
-Minimal `~/.clawdbot/clawdbot.json` (model + defaults):
+最小化 `~/.clawdbot/clawdbot.json`（模型 + 默认值）：
 
 ```json5
 {
@@ -310,26 +311,26 @@ Minimal `~/.clawdbot/clawdbot.json` (model + defaults):
 }
 ```
 
-[Full configuration reference (all keys + examples).](https://docs.clawd.bot/gateway/configuration)
+[完整配置参考（所有键 + 示例）](https://docs.clawd.bot/gateway/configuration)
 
-## Security model (important)
+## 安全模型（重要）
 
-- **Default:** tools run on the host for the **main** session, so the agent has full access when it’s just you.
-- **Group/channel safety:** set `agents.defaults.sandbox.mode: "non-main"` to run **non‑main sessions** (groups/channels) inside per‑session Docker sandboxes; bash then runs in Docker for those sessions.
-- **Sandbox defaults:** allowlist `bash`, `process`, `read`, `write`, `edit`, `sessions_list`, `sessions_history`, `sessions_send`, `sessions_spawn`; denylist `browser`, `canvas`, `nodes`, `cron`, `discord`, `gateway`.
+- **默认：** 工具在 **main** 会话的主机上运行，所以当只有你一个人时，智能体拥有完全访问权限。
+- **群组/渠道安全：** 设置 `agents.defaults.sandbox.mode: "non-main"` 以在每会话的 Docker 沙箱中运行**非 main 会话**（群组/渠道）；这些会话的 bash 会在 Docker 中运行。
+- **沙箱默认值：** 白名单：`bash`、`process`、`read`、`write`、`edit`、`sessions_list`、`sessions_history`、`sessions_send`、`sessions_spawn`；黑名单：`browser`、`canvas`、`nodes`、`cron`、`discord`、`gateway`。
 
-Details: [Security guide](https://docs.clawd.bot/gateway/security) · [Docker + sandboxing](https://docs.clawd.bot/install/docker) · [Sandbox config](https://docs.clawd.bot/gateway/configuration)
+详情：[安全指南](https://docs.clawd.bot/gateway/security) · [Docker + 沙箱](https://docs.clawd.bot/install/docker) · [沙箱配置](https://docs.clawd.bot/gateway/configuration)
 
 ### [WhatsApp](https://docs.clawd.bot/channels/whatsapp)
 
-- Link the device: `pnpm clawdbot channels login` (stores creds in `~/.clawdbot/credentials`).
-- Allowlist who can talk to the assistant via `channels.whatsapp.allowFrom`.
-- If `channels.whatsapp.groups` is set, it becomes a group allowlist; include `"*"` to allow all.
+- 链接设备：`pnpm clawdbot channels login`（凭证存储在 `~/.clawdbot/credentials`）。
+- 通过 `channels.whatsapp.allowFrom` 配置允许与助手对话的人员白名单。
+- 如果设置了 `channels.whatsapp.groups`，它会成为群组白名单；包含 `"*"` 表示允许所有。
 
 ### [Telegram](https://docs.clawd.bot/channels/telegram)
 
-- Set `TELEGRAM_BOT_TOKEN` or `channels.telegram.botToken` (env wins).
-- Optional: set `channels.telegram.groups` (with `channels.telegram.groups."*".requireMention`); when set, it is a group allowlist (include `"*"` to allow all). Also `channels.telegram.allowFrom` or `channels.telegram.webhookUrl` as needed.
+- 设置 `TELEGRAM_BOT_TOKEN` 或 `channels.telegram.botToken`（环境变量优先）。
+- 可选：设置 `channels.telegram.groups`（使用 `channels.telegram.groups."*".requireMention`）；设置后它是群组白名单（包含 `"*"` 表示允许所有）。也可根据需要设置 `channels.telegram.allowFrom` 或 `channels.telegram.webhookUrl`。
 
 ```json5
 {
@@ -343,12 +344,12 @@ Details: [Security guide](https://docs.clawd.bot/gateway/security) · [Docker + 
 
 ### [Slack](https://docs.clawd.bot/channels/slack)
 
-- Set `SLACK_BOT_TOKEN` + `SLACK_APP_TOKEN` (or `channels.slack.botToken` + `channels.slack.appToken`).
+- 设置 `SLACK_BOT_TOKEN` + `SLACK_APP_TOKEN`（或 `channels.slack.botToken` + `channels.slack.appToken`）。
 
 ### [Discord](https://docs.clawd.bot/channels/discord)
 
-- Set `DISCORD_BOT_TOKEN` or `channels.discord.token` (env wins).
-- Optional: set `commands.native`, `commands.text`, or `commands.useAccessGroups`, plus `channels.discord.dm.allowFrom`, `channels.discord.guilds`, or `channels.discord.mediaMaxMb` as needed.
+- 设置 `DISCORD_BOT_TOKEN` 或 `channels.discord.token`（环境变量优先）。
+- 可选：设置 `commands.native`、`commands.text` 或 `commands.useAccessGroups`，以及 `channels.discord.dm.allowFrom`、`channels.discord.guilds` 或 `channels.discord.mediaMaxMb`。
 
 ```json5
 {
@@ -362,23 +363,23 @@ Details: [Security guide](https://docs.clawd.bot/gateway/security) · [Docker + 
 
 ### [Signal](https://docs.clawd.bot/channels/signal)
 
-- Requires `signal-cli` and a `channels.signal` config section.
+- 需要 `signal-cli` 和 `channels.signal` 配置部分。
 
 ### [iMessage](https://docs.clawd.bot/channels/imessage)
 
-- macOS only; Messages must be signed in.
-- If `channels.imessage.groups` is set, it becomes a group allowlist; include `"*"` to allow all.
+- 仅限 macOS；需要登录信息应用。
+- 如果设置了 `channels.imessage.groups`，它会成为群组白名单；包含 `"*"` 表示允许所有。
 
 ### [Microsoft Teams](https://docs.clawd.bot/channels/msteams)
 
-- Configure a Teams app + Bot Framework, then add a `msteams` config section.
-- Allowlist who can talk via `msteams.allowFrom`; group access via `msteams.groupAllowFrom` or `msteams.groupPolicy: "open"`.
+- 配置 Teams 应用 + Bot Framework，然后添加 `msteams` 配置部分。
+- 通过 `msteams.allowFrom` 配置允许对话的人员白名单；群组访问通过 `msteams.groupAllowFrom` 或 `msteams.groupPolicy: "open"`。
 
 ### [WebChat](https://docs.clawd.bot/web/webchat)
 
-- Uses the Gateway WebSocket; no separate WebChat port/config.
+- 使用 Gateway WebSocket；无需单独的 WebChat 端口/配置。
 
-Browser control (optional):
+浏览器控制（可选）：
 
 ```json5
 {
@@ -390,91 +391,90 @@ Browser control (optional):
 }
 ```
 
-## Docs
+## 文档
 
-Use these when you’re past the onboarding flow and want the deeper reference.
-- [Start with the docs index for navigation and “what’s where.”](https://docs.clawd.bot)
-- [Read the architecture overview for the gateway + protocol model.](https://docs.clawd.bot/concepts/architecture)
-- [Use the full configuration reference when you need every key and example.](https://docs.clawd.bot/gateway/configuration)
-- [Run the Gateway by the book with the operational runbook.](https://docs.clawd.bot/gateway)
-- [Learn how the Control UI/Web surfaces work and how to expose them safely.](https://docs.clawd.bot/web)
-- [Understand remote access over SSH tunnels or tailnets.](https://docs.clawd.bot/gateway/remote)
-- [Follow the onboarding wizard flow for a guided setup.](https://docs.clawd.bot/start/wizard)
-- [Wire external triggers via the webhook surface.](https://docs.clawd.bot/automation/webhook)
-- [Set up Gmail Pub/Sub triggers.](https://docs.clawd.bot/automation/gmail-pubsub)
-- [Learn the macOS menu bar companion details.](https://docs.clawd.bot/platforms/mac/menu-bar)
-- [Platform guides: Windows (WSL2)](https://docs.clawd.bot/platforms/windows), [Linux](https://docs.clawd.bot/platforms/linux), [macOS](https://docs.clawd.bot/platforms/macos), [iOS](https://docs.clawd.bot/platforms/ios), [Android](https://docs.clawd.bot/platforms/android)
-- [Debug common failures with the troubleshooting guide.](https://docs.clawd.bot/channels/troubleshooting)
-- [Review security guidance before exposing anything.](https://docs.clawd.bot/gateway/security)
+当你完成安装引导流程并想查看更深入的参考时，使用这些文档。
+- [从文档索引开始，了解导航和“什么在哪里”](https://docs.clawd.bot)
+- [阅读架构概述，了解 Gateway + 协议模型](https://docs.clawd.bot/concepts/architecture)
+- [需要所有键和示例时，使用完整配置参考](https://docs.clawd.bot/gateway/configuration)
+- [按照运维手册运行 Gateway](https://docs.clawd.bot/gateway)
+- [了解控制 UI/Web 界面如何工作以及如何安全地暴露它们](https://docs.clawd.bot/web)
+- [了解通过 SSH 隧道或 tailnet 进行远程访问](https://docs.clawd.bot/gateway/remote)
+- [按照安装向导流程进行引导式设置](https://docs.clawd.bot/start/wizard)
+- [通过 Webhook 界面连接外部触发器](https://docs.clawd.bot/automation/webhook)
+- [设置 Gmail Pub/Sub 触发器](https://docs.clawd.bot/automation/gmail-pubsub)
+- [了解 macOS 菜单栏配套应用详情](https://docs.clawd.bot/platforms/mac/menu-bar)
+- [平台指南：Windows (WSL2)](https://docs.clawd.bot/platforms/windows)、[Linux](https://docs.clawd.bot/platforms/linux)、[macOS](https://docs.clawd.bot/platforms/macos)、[iOS](https://docs.clawd.bot/platforms/ios)、[Android](https://docs.clawd.bot/platforms/android)
+- [使用故障排除指南调试常见故障](https://docs.clawd.bot/channels/troubleshooting)
+- [在暴露任何内容之前查看安全指南](https://docs.clawd.bot/gateway/security)
 
-## Advanced docs (discovery + control)
+## 高级文档（发现 + 控制）
 
-- [Discovery + transports](https://docs.clawd.bot/gateway/discovery)
+- [发现 + 传输](https://docs.clawd.bot/gateway/discovery)
 - [Bonjour/mDNS](https://docs.clawd.bot/gateway/bonjour)
-- [Gateway pairing](https://docs.clawd.bot/gateway/pairing)
-- [Remote gateway README](https://docs.clawd.bot/gateway/remote-gateway-readme)
-- [Control UI](https://docs.clawd.bot/web/control-ui)
-- [Dashboard](https://docs.clawd.bot/web/dashboard)
+- [Gateway 配对](https://docs.clawd.bot/gateway/pairing)
+- [远程 Gateway 自述文件](https://docs.clawd.bot/gateway/remote-gateway-readme)
+- [控制 UI](https://docs.clawd.bot/web/control-ui)
+- [仪表盘](https://docs.clawd.bot/web/dashboard)
 
-## Operations & troubleshooting
+## 运维与故障排除
 
-- [Health checks](https://docs.clawd.bot/gateway/health)
-- [Gateway lock](https://docs.clawd.bot/gateway/gateway-lock)
-- [Background process](https://docs.clawd.bot/gateway/background-process)
-- [Browser troubleshooting (Linux)](https://docs.clawd.bot/tools/browser-linux-troubleshooting)
-- [Logging](https://docs.clawd.bot/logging)
+- [健康检查](https://docs.clawd.bot/gateway/health)
+- [Gateway 锁](https://docs.clawd.bot/gateway/gateway-lock)
+- [后台进程](https://docs.clawd.bot/gateway/background-process)
+- [浏览器故障排除 (Linux)](https://docs.clawd.bot/tools/browser-linux-troubleshooting)
+- [日志](https://docs.clawd.bot/logging)
 
-## Deep dives
+## 深入探讨
 
-- [Agent loop](https://docs.clawd.bot/concepts/agent-loop)
-- [Presence](https://docs.clawd.bot/concepts/presence)
-- [TypeBox schemas](https://docs.clawd.bot/concepts/typebox)
-- [RPC adapters](https://docs.clawd.bot/reference/rpc)
-- [Queue](https://docs.clawd.bot/concepts/queue)
+- [智能体循环](https://docs.clawd.bot/concepts/agent-loop)
+- [在线状态](https://docs.clawd.bot/concepts/presence)
+- [TypeBox 模式](https://docs.clawd.bot/concepts/typebox)
+- [RPC 适配器](https://docs.clawd.bot/reference/rpc)
+- [队列](https://docs.clawd.bot/concepts/queue)
 
-## Workspace & skills
+## 工作区与技能
 
-- [Skills config](https://docs.clawd.bot/tools/skills-config)
-- [Default AGENTS](https://docs.clawd.bot/reference/AGENTS.default)
-- [Templates: AGENTS](https://docs.clawd.bot/reference/templates/AGENTS)
-- [Templates: BOOTSTRAP](https://docs.clawd.bot/reference/templates/BOOTSTRAP)
-- [Templates: IDENTITY](https://docs.clawd.bot/reference/templates/IDENTITY)
-- [Templates: SOUL](https://docs.clawd.bot/reference/templates/SOUL)
-- [Templates: TOOLS](https://docs.clawd.bot/reference/templates/TOOLS)
-- [Templates: USER](https://docs.clawd.bot/reference/templates/USER)
+- [技能配置](https://docs.clawd.bot/tools/skills-config)
+- [默认 AGENTS](https://docs.clawd.bot/reference/AGENTS.default)
+- [模板：AGENTS](https://docs.clawd.bot/reference/templates/AGENTS)
+- [模板：BOOTSTRAP](https://docs.clawd.bot/reference/templates/BOOTSTRAP)
+- [模板：IDENTITY](https://docs.clawd.bot/reference/templates/IDENTITY)
+- [模板：SOUL](https://docs.clawd.bot/reference/templates/SOUL)
+- [模板：TOOLS](https://docs.clawd.bot/reference/templates/TOOLS)
+- [模板：USER](https://docs.clawd.bot/reference/templates/USER)
 
-## Platform internals
+## 平台内部细节
 
-- [macOS dev setup](https://docs.clawd.bot/platforms/mac/dev-setup)
-- [macOS menu bar](https://docs.clawd.bot/platforms/mac/menu-bar)
-- [macOS voice wake](https://docs.clawd.bot/platforms/mac/voicewake)
-- [iOS node](https://docs.clawd.bot/platforms/ios)
-- [Android node](https://docs.clawd.bot/platforms/android)
+- [macOS 开发设置](https://docs.clawd.bot/platforms/mac/dev-setup)
+- [macOS 菜单栏](https://docs.clawd.bot/platforms/mac/menu-bar)
+- [macOS 语音唤醒](https://docs.clawd.bot/platforms/mac/voicewake)
+- [iOS 节点](https://docs.clawd.bot/platforms/ios)
+- [Android 节点](https://docs.clawd.bot/platforms/android)
 - [Windows (WSL2)](https://docs.clawd.bot/platforms/windows)
-- [Linux app](https://docs.clawd.bot/platforms/linux)
+- [Linux 应用](https://docs.clawd.bot/platforms/linux)
 
-## Email hooks (Gmail)
+## 邮件钩子 (Gmail)
 
 - [docs.clawd.bot/gmail-pubsub](https://docs.clawd.bot/automation/gmail-pubsub)
 
 ## Clawd
 
-Clawdbot was built for **Clawd**, a space lobster AI assistant. 🦞
-by Peter Steinberger and the community.
+Clawdbot 是为 **Clawd** 而构建的，一只太空龙虾 AI 助手。🦞
+由 Peter Steinberger 和社区共同开发。
 
 - [clawd.me](https://clawd.me)
 - [soul.md](https://soul.md)
 - [steipete.me](https://steipete.me)
 
-## Community
+## 社区
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, maintainers, and how to submit PRs.
-AI/vibe-coded PRs welcome! 🤖
+参考 [CONTRIBUTING.md](CONTRIBUTING.md) 了解指南、维护者和如何提交 PR。
+欢迎 AI/vibe-coded PR！🤖
 
-Special thanks to [Mario Zechner](https://mariozechner.at/) for his support and for
-[pi-mono](https://github.com/badlogic/pi-mono).
+特别感谢 [Mario Zechner](https://mariozechner.at/) 的支持以及 [pi-mono](https://github.com/badlogic/pi-mono) 项目。
 
-Thanks to all clawtributors:
+感谢所有贡献者：
 
 <p align="left">
   <a href="https://github.com/steipete"><img src="https://avatars.githubusercontent.com/u/58493?v=4&s=48" width="48" height="48" alt="steipete" title="steipete"/></a> <a href="https://github.com/plum-dawg"><img src="https://avatars.githubusercontent.com/u/5909950?v=4&s=48" width="48" height="48" alt="plum-dawg" title="plum-dawg"/></a> <a href="https://github.com/bohdanpodvirnyi"><img src="https://avatars.githubusercontent.com/u/31819391?v=4&s=48" width="48" height="48" alt="bohdanpodvirnyi" title="bohdanpodvirnyi"/></a> <a href="https://github.com/iHildy"><img src="https://avatars.githubusercontent.com/u/25069719?v=4&s=48" width="48" height="48" alt="iHildy" title="iHildy"/></a> <a href="https://github.com/joaohlisboa"><img src="https://avatars.githubusercontent.com/u/8200873?v=4&s=48" width="48" height="48" alt="joaohlisboa" title="joaohlisboa"/></a> <a href="https://github.com/mneves75"><img src="https://avatars.githubusercontent.com/u/2423436?v=4&s=48" width="48" height="48" alt="mneves75" title="mneves75"/></a> <a href="https://github.com/MatthieuBizien"><img src="https://avatars.githubusercontent.com/u/173090?v=4&s=48" width="48" height="48" alt="MatthieuBizien" title="MatthieuBizien"/></a> <a href="https://github.com/MaudeBot"><img src="https://avatars.githubusercontent.com/u/255777700?v=4&s=48" width="48" height="48" alt="MaudeBot" title="MaudeBot"/></a> <a href="https://github.com/Glucksberg"><img src="https://avatars.githubusercontent.com/u/80581902?v=4&s=48" width="48" height="48" alt="Glucksberg" title="Glucksberg"/></a> <a href="https://github.com/rahthakor"><img src="https://avatars.githubusercontent.com/u/8470553?v=4&s=48" width="48" height="48" alt="rahthakor" title="rahthakor"/></a>

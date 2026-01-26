@@ -26,7 +26,7 @@ export function registerBrowserServeCommands(
 ) {
   browser
     .command("serve")
-    .description("Run a standalone browser control server (for remote gateways)")
+    .description("运行独立的浏览器控制服务器（用于远程网关）")
     .option("--bind <host>", "Bind host (default: 127.0.0.1)")
     .option("--port <port>", "Bind port (default: from browser.controlUrl)")
     .option(

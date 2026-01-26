@@ -27,9 +27,9 @@ export function registerBrowserDebugCommands(
 ) {
   browser
     .command("highlight")
-    .description("Highlight an element by ref")
-    .argument("<ref>", "Ref id from snapshot")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("通过引用高亮元素")
+    .argument("<ref>", "来自快照的引用 ID")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (ref: string, opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -50,9 +50,9 @@ export function registerBrowserDebugCommands(
 
   browser
     .command("errors")
-    .description("Get recent page errors")
-    .option("--clear", "Clear stored errors after reading", false)
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("获取最近的页面错误")
+    .option("--clear", "读取后清除存储的错误", false)
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -68,7 +68,7 @@ export function registerBrowserDebugCommands(
           return;
         }
         if (!result.errors.length) {
-          defaultRuntime.log("No page errors.");
+          defaultRuntime.log("无页面错误。");
           return;
         }
         defaultRuntime.log(
@@ -81,10 +81,10 @@ export function registerBrowserDebugCommands(
 
   browser
     .command("requests")
-    .description("Get recent network requests (best-effort)")
-    .option("--filter <text>", "Only show URLs that contain this substring")
-    .option("--clear", "Clear stored requests after reading", false)
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("获取最近的网络请求（尽力而为）")
+    .option("--filter <text>", "仅显示包含此子字符串的 URL")
+    .option("--clear", "读取后清除存储的请求", false)
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -101,7 +101,7 @@ export function registerBrowserDebugCommands(
           return;
         }
         if (!result.requests.length) {
-          defaultRuntime.log("No requests recorded.");
+          defaultRuntime.log("无请求记录。");
           return;
         }
         defaultRuntime.log(
@@ -117,15 +117,15 @@ export function registerBrowserDebugCommands(
       });
     });
 
-  const trace = browser.command("trace").description("Record a Playwright trace");
+  const trace = browser.command("trace").description("记录 Playwright 追踪");
 
   trace
     .command("start")
-    .description("Start trace recording")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
-    .option("--no-screenshots", "Disable screenshots")
-    .option("--no-snapshots", "Disable snapshots")
-    .option("--sources", "Include sources (bigger traces)", false)
+    .description("开始追踪记录")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
+    .option("--no-screenshots", "禁用截图")
+    .option("--no-snapshots", "禁用快照")
+    .option("--sources", "包含源代码（更大的追踪文件）", false)
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -142,15 +142,15 @@ export function registerBrowserDebugCommands(
           defaultRuntime.log(JSON.stringify(result, null, 2));
           return;
         }
-        defaultRuntime.log("trace started");
+        defaultRuntime.log("追踪已开始");
       });
     });
 
   trace
     .command("stop")
-    .description("Stop trace recording and write a .zip")
-    .option("--out <path>", "Output path for the trace zip")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("停止追踪记录并生成 .zip 文件")
+    .option("--out <path>", "追踪 ZIP 文件的输出路径")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);

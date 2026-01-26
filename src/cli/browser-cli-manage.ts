@@ -35,7 +35,7 @@ export function registerBrowserManageCommands(
 ) {
   browser
     .command("status")
-    .description("Show browser status")
+    .description("显示浏览器状态")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -53,7 +53,7 @@ export function registerBrowserManageCommands(
           [
             `profile: ${status.profile ?? "clawd"}`,
             `enabled: ${status.enabled}`,
-            `running: ${status.running}`,
+            `运行中: ${status.running}`,
             `controlUrl: ${status.controlUrl}`,
             `cdpPort: ${status.cdpPort}`,
             `cdpUrl: ${status.cdpUrl ?? `http://127.0.0.1:${status.cdpPort}`}`,
@@ -69,7 +69,7 @@ export function registerBrowserManageCommands(
 
   browser
     .command("start")
-    .description("Start the browser (no-op if already running)")
+    .description("启动浏览器（如果已在运行则无操作）")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -82,13 +82,13 @@ export function registerBrowserManageCommands(
           return;
         }
         const name = status.profile ?? "clawd";
-        defaultRuntime.log(info(`🦞 browser [${name}] running: ${status.running}`));
+        defaultRuntime.log(info(`🦞 浏览器 [${name}] 运行中: ${status.running}`));
       });
     });
 
   browser
     .command("stop")
-    .description("Stop the browser (best-effort)")
+    .description("停止浏览器（尽力而为）")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -101,13 +101,13 @@ export function registerBrowserManageCommands(
           return;
         }
         const name = status.profile ?? "clawd";
-        defaultRuntime.log(info(`🦞 browser [${name}] running: ${status.running}`));
+        defaultRuntime.log(info(`🦞 浏览器 [${name}] 运行中: ${status.running}`));
       });
     });
 
   browser
     .command("reset-profile")
-    .description("Reset browser profile (moves it to Trash)")
+    .description("重置浏览器配置文件（将其移至废纸篓）")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -119,17 +119,17 @@ export function registerBrowserManageCommands(
           return;
         }
         if (!result.moved) {
-          defaultRuntime.log(info(`🦞 browser profile already missing.`));
+          defaultRuntime.log(info(`🦞 浏览器配置文件已丢失。`));
           return;
         }
         const dest = result.to ?? result.from;
-        defaultRuntime.log(info(`🦞 browser profile moved to Trash (${dest})`));
+        defaultRuntime.log(info(`🦞 浏览器配置文件已移至废纸篓 (${dest})`));
       });
     });
 
   browser
     .command("tabs")
-    .description("List open tabs")
+    .description("列出打开的标签页")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -141,13 +141,13 @@ export function registerBrowserManageCommands(
           return;
         }
         if (tabs.length === 0) {
-          defaultRuntime.log("No tabs (browser closed or no targets).");
+          defaultRuntime.log("无标签页（浏览器已关闭或无目标）。");
           return;
         }
         defaultRuntime.log(
           tabs
             .map(
-              (t, i) => `${i + 1}. ${t.title || "(untitled)"}\n   ${t.url}\n   id: ${t.targetId}`,
+              (t, i) => `${i + 1}. ${t.title || "（无标题）"}\n   ${t.url}\n   id: ${t.targetId}`,
             )
             .join("\n"),
         );
@@ -156,7 +156,7 @@ export function registerBrowserManageCommands(
 
   const tab = browser
     .command("tab")
-    .description("Tab shortcuts (index-based)")
+    .description("标签页快捷方式（基于索引）")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -172,13 +172,13 @@ export function registerBrowserManageCommands(
           return;
         }
         if (tabs.length === 0) {
-          defaultRuntime.log("No tabs (browser closed or no targets).");
+          defaultRuntime.log("无标签页（浏览器已关闭或无目标）。");
           return;
         }
         defaultRuntime.log(
           tabs
             .map(
-              (t, i) => `${i + 1}. ${t.title || "(untitled)"}\n   ${t.url}\n   id: ${t.targetId}`,
+              (t, i) => `${i + 1}. ${t.title || "（无标题）"}\n   ${t.url}\n   id: ${t.targetId}`,
             )
             .join("\n"),
         );
@@ -187,7 +187,7 @@ export function registerBrowserManageCommands(
 
   tab
     .command("new")
-    .description("Open a new tab (about:blank)")
+    .description("打开新标签页（about:blank）")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -201,20 +201,20 @@ export function registerBrowserManageCommands(
           defaultRuntime.log(JSON.stringify(result, null, 2));
           return;
         }
-        defaultRuntime.log("opened new tab");
+        defaultRuntime.log("已打开新标签页");
       });
     });
 
   tab
     .command("select")
-    .description("Focus tab by index (1-based)")
-    .argument("<index>", "Tab index (1-based)", (v: string) => Number(v))
+    .description("按索引聚焦标签页（从1开始）")
+    .argument("<index>", "标签页索引（从1开始）", (v: string) => Number(v))
     .action(async (index: number, _opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
       const profile = parent?.browserProfile;
       if (!Number.isFinite(index) || index < 1) {
-        defaultRuntime.error(danger("index must be a positive number"));
+        defaultRuntime.error(danger("索引必须是正数"));
         defaultRuntime.exit(1);
         return;
       }
@@ -228,14 +228,14 @@ export function registerBrowserManageCommands(
           defaultRuntime.log(JSON.stringify(result, null, 2));
           return;
         }
-        defaultRuntime.log(`selected tab ${Math.floor(index)}`);
+        defaultRuntime.log(`已选择标签页 ${Math.floor(index)}`);
       });
     });
 
   tab
     .command("close")
-    .description("Close tab by index (1-based); default: first tab")
-    .argument("[index]", "Tab index (1-based)", (v: string) => Number(v))
+    .description("按索引关闭标签页（从1开始）；默认：第一个标签页")
+    .argument("[index]", "标签页索引（从1开始）", (v: string) => Number(v))
     .action(async (index: number | undefined, _opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -243,7 +243,7 @@ export function registerBrowserManageCommands(
       const idx =
         typeof index === "number" && Number.isFinite(index) ? Math.floor(index) - 1 : undefined;
       if (typeof idx === "number" && idx < 0) {
-        defaultRuntime.error(danger("index must be >= 1"));
+        defaultRuntime.error(danger("索引必须 >= 1"));
         defaultRuntime.exit(1);
         return;
       }
@@ -257,14 +257,14 @@ export function registerBrowserManageCommands(
           defaultRuntime.log(JSON.stringify(result, null, 2));
           return;
         }
-        defaultRuntime.log("closed tab");
+        defaultRuntime.log("已关闭标签页");
       });
     });
 
   browser
     .command("open")
-    .description("Open a URL in a new tab")
-    .argument("<url>", "URL to open")
+    .description("在新标签页中打开 URL")
+    .argument("<url>", "要打开的 URL")
     .action(async (url: string, _opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -275,14 +275,14 @@ export function registerBrowserManageCommands(
           defaultRuntime.log(JSON.stringify(tab, null, 2));
           return;
         }
-        defaultRuntime.log(`opened: ${tab.url}\nid: ${tab.targetId}`);
+        defaultRuntime.log(`已打开: ${tab.url}\nID: ${tab.targetId}`);
       });
     });
 
   browser
     .command("focus")
-    .description("Focus a tab by target id (or unique prefix)")
-    .argument("<targetId>", "Target id or unique prefix")
+    .description("按目标 ID 聚焦标签页（或唯一前缀）")
+    .argument("<targetId>", "目标 ID 或唯一前缀")
     .action(async (targetId: string, _opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -293,14 +293,14 @@ export function registerBrowserManageCommands(
           defaultRuntime.log(JSON.stringify({ ok: true }, null, 2));
           return;
         }
-        defaultRuntime.log(`focused tab ${targetId}`);
+        defaultRuntime.log(`已聚焦标签页 ${targetId}`);
       });
     });
 
   browser
     .command("close")
-    .description("Close a tab (target id optional)")
-    .argument("[targetId]", "Target id or unique prefix (optional)")
+    .description("关闭标签页（目标 ID 可选）")
+    .argument("[targetId]", "目标 ID 或唯一前缀（可选）")
     .action(async (targetId: string | undefined, _opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -315,14 +315,14 @@ export function registerBrowserManageCommands(
           defaultRuntime.log(JSON.stringify({ ok: true }, null, 2));
           return;
         }
-        defaultRuntime.log("closed tab");
+        defaultRuntime.log("已关闭标签页");
       });
     });
 
   // Profile management commands
   browser
     .command("profiles")
-    .description("List all browser profiles")
+    .description("列出所有浏览器配置文件")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -333,17 +333,17 @@ export function registerBrowserManageCommands(
           return;
         }
         if (profiles.length === 0) {
-          defaultRuntime.log("No profiles configured.");
+          defaultRuntime.log("未配置配置文件。");
           return;
         }
         defaultRuntime.log(
           profiles
             .map((p) => {
-              const status = p.running ? "running" : "stopped";
-              const tabs = p.running ? ` (${p.tabCount} tabs)` : "";
-              const def = p.isDefault ? " [default]" : "";
+              const status = p.running ? "运行中" : "已停止";
+              const tabs = p.running ? ` (${p.tabCount} 个标签页)` : "";
+              const def = p.isDefault ? " [默认]" : "";
               const loc = p.isRemote ? `cdpUrl: ${p.cdpUrl}` : `port: ${p.cdpPort}`;
-              const remote = p.isRemote ? " [remote]" : "";
+              const remote = p.isRemote ? " [远程]" : "";
               return `${p.name}: ${status}${tabs}${def}${remote}\n  ${loc}, color: ${p.color}`;
             })
             .join("\n"),
@@ -353,11 +353,11 @@ export function registerBrowserManageCommands(
 
   browser
     .command("create-profile")
-    .description("Create a new browser profile")
-    .requiredOption("--name <name>", "Profile name (lowercase, numbers, hyphens)")
-    .option("--color <hex>", "Profile color (hex format, e.g. #0066CC)")
-    .option("--cdp-url <url>", "CDP URL for remote Chrome (http/https)")
-    .option("--driver <driver>", "Profile driver (clawd|extension). Default: clawd")
+    .description("创建新的浏览器配置文件")
+    .requiredOption("--name <name>", "配置文件名称（小写字母、数字、连字符）")
+    .option("--color <hex>", "配置文件颜色（十六进制格式，例如 #0066CC）")
+    .option("--cdp-url <url>", "远程 Chrome 的 CDP URL（http/https）")
+    .option("--driver <driver>", "配置文件驱动（clawd|extension）。默认：clawd")
     .action(
       async (opts: { name: string; color?: string; cdpUrl?: string; driver?: string }, cmd) => {
         const parent = parentOpts(cmd);
@@ -376,7 +376,7 @@ export function registerBrowserManageCommands(
           const loc = result.isRemote ? `  cdpUrl: ${result.cdpUrl}` : `  port: ${result.cdpPort}`;
           defaultRuntime.log(
             info(
-              `🦞 Created profile "${result.profile}"\n${loc}\n  color: ${result.color}${
+              `🦞 已创建配置文件 "${result.profile}"\n${loc}\n  颜色: ${result.color}${
                 opts.driver === "extension" ? "\n  driver: extension" : ""
               }`,
             ),
@@ -387,8 +387,8 @@ export function registerBrowserManageCommands(
 
   browser
     .command("delete-profile")
-    .description("Delete a browser profile")
-    .requiredOption("--name <name>", "Profile name to delete")
+    .description("删除浏览器配置文件")
+    .requiredOption("--name <name>", "要删除的配置文件名称")
     .action(async (opts: { name: string }, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -399,8 +399,8 @@ export function registerBrowserManageCommands(
           return;
         }
         const msg = result.deleted
-          ? `🦞 Deleted profile "${result.profile}" (user data removed)`
-          : `🦞 Deleted profile "${result.profile}" (no user data found)`;
+          ? `🦞 已删除配置文件 "${result.profile}"（用户数据已移除）`
+          : `🦞 已删除配置文件 "${result.profile}"（未找到用户数据）`;
         defaultRuntime.log(info(msg));
       });
     });

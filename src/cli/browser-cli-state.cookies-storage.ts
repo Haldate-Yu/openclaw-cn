@@ -17,37 +17,35 @@ export function registerBrowserCookiesAndStorageCommands(
   browser: Command,
   parentOpts: (cmd: Command) => BrowserParentOpts,
 ) {
-  const cookies = browser.command("cookies").description("Read/write cookies");
+  const cookies = browser.command("cookies").description("读取/写入 cookies");
 
-  cookies
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
-    .action(async (opts, cmd) => {
-      const parent = parentOpts(cmd);
-      const baseUrl = resolveBrowserControlUrl(parent?.url);
-      const profile = parent?.browserProfile;
-      try {
-        const result = await browserCookies(baseUrl, {
-          targetId: opts.targetId?.trim() || undefined,
-          profile,
-        });
-        if (parent?.json) {
-          defaultRuntime.log(JSON.stringify(result, null, 2));
-          return;
-        }
-        defaultRuntime.log(JSON.stringify(result.cookies ?? [], null, 2));
-      } catch (err) {
-        defaultRuntime.error(danger(String(err)));
-        defaultRuntime.exit(1);
+  cookies.option("--target-id <id>", "CDP 目标 ID（或唯一前缀）").action(async (opts, cmd) => {
+    const parent = parentOpts(cmd);
+    const baseUrl = resolveBrowserControlUrl(parent?.url);
+    const profile = parent?.browserProfile;
+    try {
+      const result = await browserCookies(baseUrl, {
+        targetId: opts.targetId?.trim() || undefined,
+        profile,
+      });
+      if (parent?.json) {
+        defaultRuntime.log(JSON.stringify(result, null, 2));
+        return;
       }
-    });
+      defaultRuntime.log(JSON.stringify(result.cookies ?? [], null, 2));
+    } catch (err) {
+      defaultRuntime.error(danger(String(err)));
+      defaultRuntime.exit(1);
+    }
+  });
 
   cookies
     .command("set")
-    .description("Set a cookie (requires --url or domain+path)")
-    .argument("<name>", "Cookie name")
-    .argument("<value>", "Cookie value")
-    .requiredOption("--url <url>", "Cookie URL scope (recommended)")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("设置 cookie（需要 --url 或 domain+path）")
+    .argument("<name>", "Cookie 名称")
+    .argument("<value>", "Cookie 值")
+    .requiredOption("--url <url>", "Cookie URL 范围（推荐）")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (name: string, value: string, opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -71,8 +69,8 @@ export function registerBrowserCookiesAndStorageCommands(
 
   cookies
     .command("clear")
-    .description("Clear all cookies")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("清除所有 cookies")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -93,16 +91,16 @@ export function registerBrowserCookiesAndStorageCommands(
       }
     });
 
-  const storage = browser.command("storage").description("Read/write localStorage/sessionStorage");
+  const storage = browser.command("storage").description("读取/写入 localStorage/sessionStorage");
 
   function registerStorageKind(kind: "local" | "session") {
-    const cmd = storage.command(kind).description(`${kind}Storage commands`);
+    const cmd = storage.command(kind).description(`${kind}Storage 命令`);
 
     cmd
       .command("get")
-      .description(`Get ${kind}Storage (all keys or one key)`)
-      .argument("[key]", "Key (optional)")
-      .option("--target-id <id>", "CDP target id (or unique prefix)")
+      .description(`获取 ${kind}Storage（所有键或单个键）`)
+      .argument("[key]", "键（可选）")
+      .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
       .action(async (key: string | undefined, opts, cmd2) => {
         const parent = parentOpts(cmd2);
         const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -127,10 +125,10 @@ export function registerBrowserCookiesAndStorageCommands(
 
     cmd
       .command("set")
-      .description(`Set a ${kind}Storage key`)
-      .argument("<key>", "Key")
-      .argument("<value>", "Value")
-      .option("--target-id <id>", "CDP target id (or unique prefix)")
+      .description(`设置 ${kind}Storage 键`)
+      .argument("<key>", "键")
+      .argument("<value>", "值")
+      .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
       .action(async (key: string, value: string, opts, cmd2) => {
         const parent = parentOpts(cmd2);
         const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -156,8 +154,8 @@ export function registerBrowserCookiesAndStorageCommands(
 
     cmd
       .command("clear")
-      .description(`Clear all ${kind}Storage keys`)
-      .option("--target-id <id>", "CDP target id (or unique prefix)")
+      .description(`清除所有 ${kind}Storage 键`)
+      .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
       .action(async (opts, cmd2) => {
         const parent = parentOpts(cmd2);
         const baseUrl = resolveBrowserControlUrl(parent?.url);

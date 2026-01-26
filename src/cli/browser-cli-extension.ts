@@ -59,11 +59,11 @@ export function registerBrowserExtensionCommands(
   browser: Command,
   parentOpts: (cmd: Command) => { json?: boolean },
 ) {
-  const ext = browser.command("extension").description("Chrome extension helpers");
+  const ext = browser.command("extension").description("Chrome 扩展助手");
 
   ext
     .command("install")
-    .description("Install the Chrome extension to a stable local path")
+    .description("将 Chrome 扩展安装到稳定的本地路径")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       let installed: { path: string };
@@ -98,7 +98,7 @@ export function registerBrowserExtensionCommands(
 
   ext
     .command("path")
-    .description("Print the path to the installed Chrome extension (load unpacked)")
+    .description("打印已安装的 Chrome 扩展路径（加载未打包的）")
     .action(async (_opts, cmd) => {
       const parent = parentOpts(cmd);
       const dir = installedExtensionRootDir();

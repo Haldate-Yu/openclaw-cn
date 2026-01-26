@@ -24,9 +24,9 @@ export function registerBrowserActionObserveCommands(
 ) {
   browser
     .command("console")
-    .description("Get recent console messages")
-    .option("--level <level>", "Filter by level (error, warn, info)")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("获取最近的控制台消息")
+    .option("--level <level>", "按级别过滤（error, warn, info）")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -47,8 +47,8 @@ export function registerBrowserActionObserveCommands(
 
   browser
     .command("pdf")
-    .description("Save page as PDF")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
+    .description("将页面保存为 PDF")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
     .action(async (opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);
@@ -68,17 +68,11 @@ export function registerBrowserActionObserveCommands(
 
   browser
     .command("responsebody")
-    .description("Wait for a network response and return its body")
-    .argument("<url>", "URL (exact, substring, or glob like **/api)")
-    .option("--target-id <id>", "CDP target id (or unique prefix)")
-    .option(
-      "--timeout-ms <ms>",
-      "How long to wait for the response (default: 20000)",
-      (v: string) => Number(v),
-    )
-    .option("--max-chars <n>", "Max body chars to return (default: 200000)", (v: string) =>
-      Number(v),
-    )
+    .description("等待网络响应并返回其正文")
+    .argument("<url>", "URL（精确匹配、子字符串或通配符如 **/api）")
+    .option("--target-id <id>", "CDP 目标 ID（或唯一前缀）")
+    .option("--timeout-ms <ms>", "等待响应的时间（默认：20000）", (v: string) => Number(v))
+    .option("--max-chars <n>", "返回的最大字符数（默认：200000）", (v: string) => Number(v))
     .action(async (url: string, opts, cmd) => {
       const parent = parentOpts(cmd);
       const baseUrl = resolveBrowserControlUrl(parent?.url);

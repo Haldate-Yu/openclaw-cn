@@ -14,7 +14,7 @@ export function registerBrowserInspectCommands(
 ) {
   browser
     .command("screenshot")
-    .description("Capture a screenshot (MEDIA:<path>)")
+    .description("捕获屏幕截图（MEDIA:<路径>）")
     .argument("[targetId]", "CDP target id (or unique prefix)")
     .option("--full-page", "Capture full scrollable page", false)
     .option("--ref <ref>", "ARIA ref from ai snapshot")
@@ -46,7 +46,7 @@ export function registerBrowserInspectCommands(
 
   browser
     .command("snapshot")
-    .description("Capture a snapshot (default: ai; aria is the accessibility tree)")
+    .description("捕获快照（默认：ai；aria 是无障碍树）")
     .option("--format <aria|ai>", "Snapshot format (default: ai)", "ai")
     .option("--target-id <id>", "CDP target id (or unique prefix)")
     .option("--limit <n>", "Max nodes (default: 500/800)", (v: string) => Number(v))

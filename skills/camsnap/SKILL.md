@@ -1,6 +1,6 @@
 ---
-name: camsnap
-description: Capture frames or clips from RTSP/ONVIF cameras.
+name: 摄像头快照
+description: 从RTSP/ONVIF摄像头捕获帧或片段。
 homepage: https://camsnap.ai
 metadata: {"clawdbot":{"emoji":"📸","requires":{"bins":["camsnap"]},"install":[{"id":"brew","kind":"brew","formula":"steipete/tap/camsnap","bins":["camsnap"],"label":"Install camsnap (brew)"}]}}
 ---

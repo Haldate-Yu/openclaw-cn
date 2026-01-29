@@ -1,0 +1,27 @@
+import type { ChannelOutboundAdapter } from "../types.js";
+import { sendMessageFeishu } from "../../../feishu/send.js";
+import { getFeishuClient } from "../../../feishu/client.js";
+
+export const feishuOutbound: ChannelOutboundAdapter = {
+  deliveryMode: "direct",
+  sendText: async ({ to, text, accountId }) => {
+    const client = getFeishuClient(accountId ?? undefined);
+    const result = await sendMessageFeishu(client, to, { text });
+    return {
+      channel: "feishu",
+      messageId: result?.message_id || "unknown",
+      chatId: to,
+    };
+  },
+  sendMedia: async ({ to, text, mediaUrl, accountId }) => {
+    // TODO: Implement proper media upload
+    const client = getFeishuClient(accountId ?? undefined);
+    const content = `${text ? text + "\n" : ""}${mediaUrl}`;
+    const result = await sendMessageFeishu(client, to, { text: content });
+    return {
+      channel: "feishu",
+      messageId: result?.message_id || "unknown",
+      chatId: to,
+    };
+  },
+};

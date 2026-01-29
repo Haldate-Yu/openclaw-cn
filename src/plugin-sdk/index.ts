@@ -367,5 +367,15 @@ export {
 } from "../line/markdown-to-line.js";
 export type { ProcessedLineMessage } from "../line/markdown-to-line.js";
 
+// Channel: Feishu
+export {
+  listFeishuAccountIds,
+  resolveDefaultFeishuAccountId,
+  resolveFeishuAccount,
+  type ResolvedFeishuAccount,
+} from "../feishu/accounts.js";
+export { feishuOutbound } from "../channels/plugins/outbound/feishu.js";
+export { normalizeFeishuTarget } from "../channels/plugins/normalize/feishu.js";
+
 // Media utilities
 export { loadWebMedia, type WebMediaResult } from "../web/media.js";

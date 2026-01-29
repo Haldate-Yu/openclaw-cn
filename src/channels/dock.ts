@@ -271,6 +271,17 @@ const DOCKS: Record<ChatChannelId, ChannelDock> = {
       },
     },
   },
+  feishu: {
+    id: "feishu",
+    capabilities: {
+      chatTypes: ["direct", "group"],
+    },
+    outbound: { textChunkLimit: 2000 },
+    config: {
+      resolveAllowFrom: () => [], // TODO: implement allowFrom
+      formatAllowFrom: ({ allowFrom }) => allowFrom.map(String),
+    },
+  },
   slack: {
     id: "slack",
     capabilities: {

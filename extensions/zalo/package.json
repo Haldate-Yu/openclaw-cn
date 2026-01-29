@@ -27,7 +27,7 @@
     }
   },
   "dependencies": {
-    "clawdbot": "workspace:*",
+    "clawdbot": "workspace:moltbot-cn@*",
     "undici": "7.19.0"
   }
 }

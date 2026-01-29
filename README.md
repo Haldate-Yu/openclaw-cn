@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/moltbot-cn"><img src="https://img.shields.io/npm/v/moltbot-cn?style=for-the-badge&logo=npm&logoColor=white&label=npm" alt="npm 版本"></a>
-  <a href="https://www.npmjs.com/package/moltbot-cn"><img src="https://img.shields.io/npm/dm/moltbot-cn?style=for-the-badge&logo=npm&logoColor=white&label=下载量" alt="npm 下载量"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-%E2%89%A5%2022-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js 版本"></a>
   <a href="https://github.com/jiulingyun/moltbot-cn"><img src="https://img.shields.io/github/stars/jiulingyun/moltbot-cn?style=for-the-badge&logo=github&label=Stars" alt="GitHub Stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/许可证-MIT-blue.svg?style=for-the-badge" alt="MIT 许可证"></a>
 </p>

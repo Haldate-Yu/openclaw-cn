@@ -28,6 +28,10 @@ openclaw-cn onboard
 2. 配置应用凭证
 3. 启动网关
 
+✅ **完成配置后**，您可以使用以下命令检查网关状态：
+- `openclaw-cn gateway status` - 查看网关运行状态
+- `openclaw-cn logs --follow` - 查看实时日志
+
 ### 方式二：通过命令行添加
 
 如果您已经完成了初始安装，可以用以下命令添加飞书渠道：
@@ -37,6 +41,11 @@ openclaw-cn channels add
 ```
 
 然后根据交互式提示选择 Feishu，输入 App ID 和 App Secret 即可。
+
+✅ **完成配置后**，您可以使用以下命令管理网关：
+- `openclaw-cn gateway status` - 查看网关运行状态
+- `openclaw-cn gateway restart` - 重启网关以应用新配置
+- `openclaw-cn logs --follow` - 查看实时日志
 
 ---
 
@@ -110,9 +119,15 @@ openclaw-cn channels add
 
 ### 6. 配置事件订阅
 
+⚠️ **重要提醒**：在配置事件订阅前，请务必确保已完成以下步骤：
+1. 运行 `openclaw-cn channels add` 添加了 Feishu 渠道
+2. 网关处于启动状态（可通过 `openclaw-cn gateway status` 检查状态）
+
 在 **事件订阅** 页面：
 1. 选择 **使用长连接接收事件**（WebSocket 模式）
 2. 添加事件：`im.message.receive_v1`（接收消息）
+
+⚠️ **注意**：如果网关未启动或渠道未添加，长连接设置将保存失败。
 
 ![配置事件订阅](../images/feishu-step6-event-subscription.png)
 
@@ -310,6 +325,18 @@ openclaw-cn pairing list feishu
 
 > 注意：飞书目前不支持原生命令菜单，命令需要以文本形式发送。
 
+## 网关管理命令
+
+在配置和使用飞书渠道时，您可能需要使用以下网关管理命令：
+
+| 命令 | 说明 |
+|------|------|
+| `openclaw-cn gateway status` | 查看网关运行状态 |
+| `openclaw-cn gateway install` | 安装/启动网关服务 |
+| `openclaw-cn gateway stop` | 停止网关服务 |
+| `openclaw-cn gateway restart` | 重启网关服务 |
+| `openclaw-cn logs --follow` | 实时查看日志输出 |
+
 ---
 
 ## 故障排除
@@ -327,6 +354,8 @@ openclaw-cn pairing list feishu
 2. 检查事件订阅是否配置正确（`im.message.receive_v1`）
 3. 检查是否选择了 **长连接** 模式
 4. 检查应用权限是否完整
+5. 检查网关是否正在运行：`openclaw-cn gateway status`
+6. 查看实时日志：`openclaw-cn logs --follow`
 
 ### App Secret 泄露怎么办
 

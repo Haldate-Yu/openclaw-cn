@@ -9,16 +9,16 @@ read_when:
 
 ## 服务简介
 - 持续运行的进程，负责管理单一的 Baileys/Telegram 连接以及控制/事件平面。
-- 取代旧版 `gateway` 命令。CLI 入口点：`clawdbot gateway`。
+- 取代旧版 `gateway` 命令。CLI 入口点：`openclaw-cn gateway`。
 - 持续运行直到被停止；在发生致命错误时以非零退出码退出，以便监管程序重启它。
 
 ## 如何运行（本地）
 ```bash
-clawdbot gateway --port 18789
+openclaw-cn gateway --port 18789
 # 在标准输入输出中显示完整的调试/跟踪日志：
-clawdbot gateway --port 18789 --verbose
+openclaw-cn gateway --port 18789 --verbose
 # 如果端口被占用，终止监听者然后启动：
-clawdbot gateway --force
+openclaw-cn gateway --force
 # 开发循环（在 TS 更改时自动重新加载）：
 pnpm gateway:watch
 ```
@@ -72,11 +72,11 @@ pnpm gateway:watch
 快速路径：运行完全隔离的开发实例（配置/状态/工作空间），而不影响您的主要设置。
 
 ```bash
-clawdbot --dev setup
-clawdbot --dev gateway --allow-unconfigured
+openclaw-cn --dev setup
+openclaw-cn --dev gateway --allow-unconfigured
 # 然后针对开发实例：
-clawdbot --dev status
-clawdbot --dev health
+openclaw-cn --dev status
+openclaw-cn --dev health
 ```
 
 默认值（可以通过环境变量/标志/配置覆盖）：
@@ -102,14 +102,14 @@ clawdbot --dev health
 
 每个配置文件的服务安装：
 ```bash
-clawdbot --profile main gateway install
-clawdbot --profile rescue gateway install
+openclaw-cn --profile main gateway install
+openclaw-cn --profile rescue gateway install
 ```
 
 示例：
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a clawdbot gateway --port 19001
-OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b clawdbot gateway --port 19002
+OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a openclaw-cn gateway --port 19001
+OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b openclaw-cn gateway --port 19002
 ```
 
 ## 协议（操作员视图）
@@ -123,7 +123,7 @@ OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b clawdbo
 - `agent` 响应分为两个阶段：首先是 `res` 确认 `{runId,status:"accepted"}`，然后在运行完成后最终的 `res` `{runId,status:"ok"|"error",summary}`；流式输出作为 `event:"agent"` 到达。
 
 ## 方法（初始集）
-- `health` — 完整健康快照（与 `clawdbot health --json` 格式相同）。
+- `health` — 完整健康快照（与 `openclaw-cn health --json` 格式相同）。
 - `status` — 简短摘要。
 - `system-presence` — 当前在线状态列表。
 - `system-event` — 发布在线状态/系统备注（结构化）。
@@ -175,48 +175,40 @@ OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b clawdbo
 
 ## 监管（macOS 示例）
 - 使用 launchd 使服务保持运行：
-  - 程序：`clawdbot` 的路径
+  - 程序：`openclaw-cn` 的路径
   - 参数：`gateway`
   - KeepAlive：true
   - StandardOut/Err：文件路径或 `syslog`
 - 失败时，launchd 会重启；严重错误配置应持续退出，以便操作员注意到。
 - LaunchAgents 是每用户且需要登录会话；对于无头设置，请使用自定义 LaunchDaemon（未随附）。
-  - `clawdbot gateway install` 写入 `~/Library/LaunchAgents/com.openclaw.gateway.plist`
+  - `openclaw-cn gateway install` 写入 `~/Library/LaunchAgents/com.openclaw.gateway.plist`
     （或 `com.openclaw.<profile>.plist`）。
-  - `clawdbot doctor` 审核 LaunchAgent 配置并可以将其更新为当前默认值。
+  - `openclaw-cn doctor` 审核 LaunchAgent 配置并可以将其更新为当前默认值。
 
 ## 网关服务管理（CLI）
 
-使用网关 CLI 进行安装/启动/停止/重启/状态查询：
+常用命令（新手只需要看这一段）：
 
-```bash
-openclaw-cn gateway status
-openclaw-cn gateway install
-openclaw-cn gateway stop
-openclaw-cn gateway restart
-openclaw-cn logs --follow
-```
+- `openclaw-cn gateway install`：安装并启动网关服务（首次使用推荐）
+- `openclaw-cn gateway status`：查看服务是否运行，以及 RPC 是否可用
+- `openclaw-cn gateway restart`：重启服务（配置变更后常用）
+- `openclaw-cn gateway stop`：停止服务
+- `openclaw-cn logs --follow`：实时查看网关日志
 
-注意事项：
-- `gateway status` 默认使用服务解析的端口/配置探测网关 RPC（可用 `--url` 覆盖）。
-- `gateway status --deep` 添加系统级扫描（LaunchDaemons/系统单元）。
-- `gateway status --no-probe` 跳过 RPC 探测（网络中断时有用）。
-- `gateway status --json` 对脚本来说是稳定的。
-- `gateway status` 分别报告 **监管运行时间**（launchd/systemd 运行）和 **RPC 可达性**（WS 连接 + 状态 RPC）。
-- `gateway status` 打印配置路径+探测目标以避免 "localhost 与 LAN 绑定" 混淆和配置文件不匹配。
-- 当服务看起来在运行但端口已关闭时，`gateway status` 包含最后的网关错误行。
-- `logs` 通过 RPC 跟踪网关文件日志（无需手动 `tail`/`grep`）。
-- 如果检测到其他类似网关的服务，CLI 会警告，除非它们是 Clawdbot 配置文件服务。
-  我们仍然建议大多数设置 **每台机器一个网关**；使用隔离的配置文件/端口进行冗余或救援机器人。参见 [多网关](/gateway/multiple-gateways)。
-  - 清理：`clawdbot gateway uninstall`（当前服务）和 `clawdbot doctor`（旧迁移）。
-- `gateway install` 在已安装时是无操作；使用 `clawdbot gateway install --force` 重新安装（配置文件/环境/路径更改）。
+排查与脚本友好命令（按需使用）：
+
+- `openclaw-cn gateway status --deep`：额外扫描系统服务状态
+- `openclaw-cn gateway status --no-probe`：仅查看服务状态，不探测 RPC
+- `openclaw-cn gateway status --json`：输出稳定 JSON，便于脚本处理
+- `openclaw-cn gateway uninstall`：卸载当前服务
+- `openclaw-cn doctor`：修复旧安装或不一致的服务配置
 
 捆绑的 Mac 应用：
 - Clawdbot.app 可以捆绑基于 Node 的网关中继并安装每用户 LaunchAgent，标签为
   `com.openclaw.gateway`（或 `com.openclaw.<profile>`）。
-- 要干净地停止它，请使用 `clawdbot gateway stop`（或 `launchctl bootout gui/$UID/com.openclaw.gateway`）。
-- 要重启，请使用 `clawdbot gateway restart`（或 `launchctl kickstart -k gui/$UID/com.openclaw.gateway`）。
-  - `launchctl` 仅在 LaunchAgent 已安装时才有效；否则请先使用 `clawdbot gateway install`。
+- 要干净地停止它，请使用 `openclaw-cn gateway stop`（或 `launchctl bootout gui/$UID/com.openclaw.gateway`）。
+- 要重启，请使用 `openclaw-cn gateway restart`（或 `launchctl kickstart -k gui/$UID/com.openclaw.gateway`）。
+  - `launchctl` 仅在 LaunchAgent 已安装时才有效；否则请先使用 `openclaw-cn gateway install`。
   - 运行命名配置文件时，将标签替换为 `com.openclaw.<profile>`。
 
 ## 监管（systemd 用户单元）
@@ -225,7 +217,7 @@ Clawdbot 在 Linux/WSL2 上默认安装 **systemd 用户服务**。我们
 对于多用户或常驻服务器，请使用 **系统服务**（不需要持久化
 运行，共享监管）。
 
-`clawdbot gateway install` 写入用户单元。`clawdbot doctor` 审核
+`openclaw-cn gateway install` 写入用户单元。`openclaw-cn doctor` 审核
 单元并可以更新它以匹配当前推荐的默认值。
 
 创建 `~/.config/systemd/user/clawdbot-gateway[-<profile>].service`：
@@ -236,7 +228,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/clawdbot gateway --port 18789
+ExecStart=/usr/local/bin/openclaw-cn gateway --port 18789
 Restart=always
 RestartSec=5
 Environment=OPENCLAW_GATEWAY_TOKEN=
@@ -280,13 +272,13 @@ Windows 安装应使用 **WSL2** 并遵循上述 Linux systemd 部分。
 - 优雅关闭：在关闭前发出 `shutdown` 事件；客户端必须处理关闭+重新连接。
 
 ## CLI 辅助命令
-- `clawdbot gateway health|status` — 通过网关 WS 请求健康状况/状态。
+- `openclaw-cn gateway health|status` — 通过网关 WS 请求健康状况/状态。
 - `openclaw-cn message send --target <num> --message "hi" [--media ...]` — 通过网关发送（对 WhatsApp 幂等）。
-- `clawdbot agent --message "hi" --to <num>` — 运行代理回合（默认等待最终结果）。
-- `clawdbot gateway call <method> --params '{"k":"v"}'` — 用于调试的原始方法调用器。
-- `clawdbot gateway stop|restart` — 停止/重启受监管的网关服务（launchd/systemd）。
+- `openclaw-cn agent --message "hi" --to <num>` — 运行代理回合（默认等待最终结果）。
+- `openclaw-cn gateway call <method> --params '{"k":"v"}'` — 用于调试的原始方法调用器。
+- `openclaw-cn gateway stop|restart` — 停止/重启受监管的网关服务（launchd/systemd）。
 - 网关辅助子命令假定在 `--url` 上运行的网关；它们不再自动产生一个。
 
 ## 迁移指导
-- 停止使用 `clawdbot gateway` 和旧版 TCP 控制端口。
+- 停止使用 `openclaw-cn gateway` 和旧版 TCP 控制端口。
 - 更新客户端以使用带有强制连接和结构化在线状态的 WS 协议。

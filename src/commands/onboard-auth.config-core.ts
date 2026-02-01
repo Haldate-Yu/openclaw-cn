@@ -772,7 +772,10 @@ export function applyVolcengineConfig(cfg: ClawdbotConfig, modelId: string): Cla
   };
 }
 
-export function applyXiaomiProviderConfig(cfg: ClawdbotConfig, modelId: string): ClawdbotConfig {
+export function applyXiaomiProviderConfig(
+  cfg: ClawdbotConfig,
+  modelId: string,
+): ClawdbotConfig {
   const models = { ...cfg.agents?.defaults?.models };
   const modelRef = `xiaomi/${modelId}`;
   models[modelRef] = {

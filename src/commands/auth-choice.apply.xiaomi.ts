@@ -6,7 +6,11 @@ import {
   normalizeApiKeyInput,
   validateApiKeyInput,
 } from "./auth-choice.api-key.js";
-import { applyAuthProfileConfig, applyXiaomiConfig, setXiaomiApiKey } from "./onboard-auth.js";
+import {
+  applyAuthProfileConfig,
+  applyXiaomiConfig,
+  setXiaomiApiKey,
+} from "./onboard-auth.js";
 
 export async function applyAuthChoiceXiaomi(
   params: ApplyAuthChoiceParams,

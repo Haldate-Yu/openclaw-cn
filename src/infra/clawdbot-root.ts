@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+const CORE_PACKAGE_NAMES = new Set(["openclaw-cn"]);
+
 async function readPackageName(dir: string): Promise<string | null> {
   try {
     const raw = await fs.readFile(path.join(dir, "package.json"), "utf-8");
@@ -16,9 +18,13 @@ async function findPackageRoot(startDir: string, maxDepth = 12): Promise<string 
   let current = path.resolve(startDir);
   for (let i = 0; i < maxDepth; i += 1) {
     const name = await readPackageName(current);
-    if (name === "clawdbot") return current;
+    if (name && CORE_PACKAGE_NAMES.has(name)) {
+      return current;
+    }
     const parent = path.dirname(current);
-    if (parent === current) break;
+    if (parent === current) {
+      break;
+    }
     current = parent;
   }
   return null;
@@ -37,7 +43,7 @@ function candidateDirsFromArgv1(argv1: string): string[] {
   return candidates;
 }
 
-export async function resolveClawdbotPackageRoot(opts: {
+export async function resolveOpenClawPackageRoot(opts: {
   cwd?: string;
   argv1?: string;
   moduleUrl?: string;
@@ -56,8 +62,13 @@ export async function resolveClawdbotPackageRoot(opts: {
 
   for (const candidate of candidates) {
     const found = await findPackageRoot(candidate);
-    if (found) return found;
+    if (found) {
+      return found;
+    }
   }
 
   return null;
 }
+
+// Alias for local branding
+export const resolveClawdbotPackageRoot = resolveOpenClawPackageRoot;
